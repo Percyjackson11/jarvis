@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Live Video Feed</title>
+</head>
+<body>
+    <h1>Create Live Video Feed</h1>
+    <video id="localVideo" autoplay muted style="width: 640px; height: 480px;"></video>
+    <br>
+    <button onclick="startStream()">Start Streaming</button>
+    <p>Your unique feed code: <span id="feedCode"></span></p>
+
+    <script>
+        let localStream;
+        let peerConnection;
+        let feedCode = Math.random().toString(36).substring(2, 9);
+        const signalingServer = "signaling.php";
+
+        document.getElementById('feedCode').textContent = feedCode;
+
+        async function startStream() {
+            try {
+                localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                document.getElementById('localVideo').srcObject = localStream;
+                createPeerConnection();
+                
+                fetch(`${signalingServer}?action=create&code=${feedCode}`)
+                    .then(response => response.json())
+                    .then(data => console.log('Feed created:', data))
+                    .catch(err => console.error('Error creating feed:', err));
+            } catch (err) {
+                console.error('Error accessing webcam:', err);
+            }
+        }
+
+        function createPeerConnection() {
+            const configuration = {
+                iceServers: [
+                    { urls: 'stun:stun.l.google.com:19302' }
+                ]
+            };
+            
+            peerConnection = new RTCPeerConnection(configuration);
+
+            localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+
+            peerConnection.onicecandidate = event => {
+                if (event.candidate) {
+                    fetch(`${signalingServer}?action=candidate&code=${feedCode}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ candidate: event.candidate })
+                    });
+                }
+            };
+
+            peerConnection.createOffer()
+                .then(offer => {
+                    peerConnection.setLocalDescription(offer);
+                    return fetch(`${signalingServer}?action=offer&code=${feedCode}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ offer: offer })
+                    });
+                })
+                .catch(err => console.error('Error creating offer:', err));
+        }
+    </script>
+</body>
+</html>

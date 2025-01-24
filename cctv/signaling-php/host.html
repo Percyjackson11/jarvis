@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Host Video Stream</title>
+    <style>
+        #streamCode {
+            font-size: 24px;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+        #errorMessage {
+            color: red;
+            margin: 10px 0;
+        }
+        #debugInfo {
+            font-family: monospace;
+            white-space: pre-wrap;
+            background-color: #f8f8f8;
+            padding: 10px;
+            margin-top: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        video {
+            max-width: 100%;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Host Video Stream</h1>
+    <video id="localVideo" autoplay muted></video>
+    <div id="streamCode"></div>
+    <div id="errorMessage"></div>
+    <button onclick="startStream()">Start Stream</button>
+    <div id="debugInfo"></div>
+
+    <script>
+        let localStream;
+        let peerConnection;
+        let streamCode;
+        const servers = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
+        const API_URL = 'signaling.php'; // Make sure this matches your setup
+
+        function debug(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            const formattedMessage = `[${timestamp}] ${message}`;
+            console.log(formattedMessage);
+            const debugDiv = document.getElementById('debugInfo');
+            debugDiv.textContent = formattedMessage + '\n' + debugDiv.textContent;
+        }
+
+        function showError(message) {
+            document.getElementById('errorMessage').textContent = message;
+            debug(`ERROR: ${message}`);
+        }
+
+        async function startStream() {
+            try {
+                debug('Starting stream...');
+                
+                // Clear previous states
+                document.getElementById('errorMessage').textContent = '';
+                document.getElementById('streamCode').textContent = '';
+                if (peerConnection) {
+                    peerConnection.close();
+                }
+                if (localStream) {
+                    localStream.getTracks().forEach(track => track.stop());
+                }
+
+                // Get media stream
+                localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                document.getElementById('localVideo').srcObject = localStream;
+                debug('Got media stream');
+
+                // Create peer connection
+                peerConnection = new RTCPeerConnection(servers);
+                localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+                debug('Added tracks to peer connection');
+
+                // Create offer
+                const offer = await peerConnection.createOffer();
+                await peerConnection.setLocalDescription(offer);
+                debug('Created and set local description');
+
+                // Wait for ICE gathering
+                debug('Waiting for ICE gathering...');
+                await new Promise((resolve) => {
+                    const checkState = () => {
+                        if (peerConnection.iceGatheringState === 'complete') {
+                            resolve();
+                        }
+                    };
+                    
+                    checkState();
+                    peerConnection.addEventListener('icegatheringstatechange', checkState);
+                    
+                    // Timeout after 5 seconds
+                    setTimeout(() => {
+                        resolve();
+                        debug('ICE gathering timed out, proceeding anyway');
+                    }, 5000);
+                });
+
+                debug('Sending offer to server...');
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        action: 'create',
+                        offer: JSON.stringify(peerConnection.localDescription)
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`Server error (${response.status}): ${errorText}`);
+                }
+
+                const data = await response.json();
+                debug(`Server response: ${JSON.stringify(data)}`);
+
+                if (!data.code) {
+                    throw new Error('No stream code received from server');
+                }
+
+                streamCode = data.code;
+                document.getElementById('streamCode').textContent = `Stream Code: ${streamCode}`;
+                debug(`Stream code generated: ${streamCode}`);
+
+                // Start polling for answer
+                pollForAnswer();
+
+            } catch (error) {
+                showError(`Failed to start stream: ${error.message}`);
+                console.error('Detailed error:', error);
+            }
+        }
+
+        async function pollForAnswer() {
+            const checkAnswer = async () => {
+                try {
+                    const response = await fetch(`${API_URL}?code=${streamCode}&type=answer`);
+                    if (!response.ok) {
+                        throw new Error(`Server error: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    if (data.answer) {
+                        debug('Received answer from viewer');
+                        const answer = JSON.parse(data.answer);
+                        await peerConnection.setRemoteDescription(answer);
+                        debug('Successfully set remote description');
+                        return true;
+                    }
+                    return false;
+                } catch (error) {
+                    debug(`Error polling for answer: ${error.message}`);
+                    return false;
+                }
+            };
+
+            const poll = async () => {
+                if (!await checkAnswer()) {
+                    setTimeout(poll, 1000);
+                }
+            };
+
+            poll();
+        }
+    </script>
+</body>
+</html>

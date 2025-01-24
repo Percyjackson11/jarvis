@@ -1,0 +1,62 @@
+import requests
+import serial
+import time
+
+# Arduino serial connection settings
+ARDUINO_PORT = 'COM8'  # Replace with your Arduino's port
+BAUD_RATE = 9600
+
+# PHP server settings
+SERVER_URL = 'http://piggy.rf.gd/jarvis/bulb-relay'  # Replace with your server URL
+INSTRUCTION_FILE = 'bulb_instructions.txt'
+
+def setup_serial():
+    ser = serial.Serial(ARDUINO_PORT, BAUD_RATE)
+    time.sleep(2)  # Wait for the connection to establish
+    return ser
+
+def get_instructions():
+    try:
+        response = requests.get(f"{SERVER_URL}/{INSTRUCTION_FILE}")
+        if response.status_code == 200:
+            return response.text.strip().split(',')
+        else:
+            print(f"Failed to fetch instructions. Status code: {response.status_code}")
+            return None
+    except requests.RequestException as e:
+        print(f"Error fetching instructions: {e}")
+        return None
+
+def control_bulb(ser, bulb_number, state):
+    if bulb_number == 1:
+        command = '1' if state == 'on' else '2'
+    elif bulb_number == 2:
+        command = '3' if state == 'on' else '4'
+    else:
+        print("Invalid bulb number")
+        return
+    
+    ser.write(command.encode())
+    print(f"Bulb {bulb_number} turned {state}")
+
+def main():
+    ser = setup_serial()
+    
+    try:
+        while True:
+            instructions = get_instructions()
+            if instructions and len(instructions) == 2:
+                bulb1_state, bulb2_state = instructions
+                
+                control_bulb(ser, 1, bulb1_state)
+                control_bulb(ser, 2, bulb2_state)
+            
+            time.sleep(5)  # Wait for 5 seconds before checking again
+    
+    except KeyboardInterrupt:
+        print("Program terminated")
+    finally:
+        ser.close()
+
+if __name__ == "__main__":
+    main()

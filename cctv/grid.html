@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home CCTV Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        #cameraForm {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        #cameraForm input[type="text"] {
+            width: 45%;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        #cameraForm button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #cameraGrid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .camera {
+            width: 48%;
+            background-color: #333;
+            padding: 10px;
+            position: relative;
+        }
+
+        .camera iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+        }
+
+        .camera h3 {
+            color: white;
+            margin: 0 0 10px;
+        }
+
+        .maximize-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Home CCTV Dashboard</h1>
+        <form id="cameraForm">
+            <input type="text" id="streamName" placeholder="Enter Camera Name" required>
+            <input type="text" id="streamCode" placeholder="Enter Stream Code" required>
+            <button type="submit">Add Camera</button>
+        </form>
+
+        <div id="cameraGrid"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('cameraForm');
+        const cameraGrid = document.getElementById('cameraGrid');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const streamName = document.getElementById('streamName').value;
+            const streamCode = document.getElementById('streamCode').value;
+
+            if (streamName && streamCode) {
+                addCameraToGrid(streamName, streamCode);
+                form.reset(); // Clears the form
+            }
+        });
+
+        function addCameraToGrid(name, code) {
+            const cameraDiv = document.createElement('div');
+            cameraDiv.className = 'camera';
+
+            cameraDiv.innerHTML = `
+                <h3>${name}</h3>
+                <iframe src="https://piggy-cctv.netlify.app/#${code}" allow="camera; microphone; display-capture; autoplay"></iframe>
+                <button class="maximize-btn" onclick="openInNewTab('${code}')">Maximize</button>
+            `;
+
+            cameraGrid.appendChild(cameraDiv);
+        }
+
+        function openInNewTab(code) {
+            const url = `https://piggy-cctv.netlify.app/#${code}`;
+            window.open(url, '_blank');
+        }
+    </script>
+
+</body>
+</html>

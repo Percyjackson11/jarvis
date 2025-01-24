@@ -1,0 +1,6 @@
+add ability to convert files to each other from: epub, mobi, azw3, pdf 
+probably:
+https://github.com/seblucas/cops
+https://github.com/nvdnkpr/PHP-Digital-Format-Convert-Epub-Mobi-PDF
+
+make it as functional as calibre

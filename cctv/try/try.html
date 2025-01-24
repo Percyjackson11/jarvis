@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Camera Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f0f0f0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .add-camera {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .camera-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .camera-box {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .camera-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        video {
+            width: 100%;
+            border-radius: 4px;
+            background: #000;
+        }
+        input {
+            padding: 8px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 8px 15px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .remove-btn {
+            background: #dc3545;
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Camera Viewer</h1>
+
+        <div class="add-camera">
+            <h3>Add Camera</h3>
+            <input type="text" id="cameraCode" placeholder="Enter Camera Code">
+<input type="text" id="cameraName" placeholder="Camera Name">
+            <button onclick="addCamera()">Add Camera</button>
+        </div>
+
+        <div id="cameraGrid" class="camera-grid">
+            <!-- Cameras will be added here dynamically -->
+        </div>
+    </div>
+
+    <script src="https://cdn.scaledrone.com/scaledrone.min.js"></script>
+    <script>
+        // Store cameras in localStorage
+        let cameras = JSON.parse(localStorage.getItem('cameras') || '[]');
+        
+        function addCamera() {
+            const code = document.getElementById('cameraCode').value.trim();
+            const name = document.getElementById('cameraName').value.trim() || `Camera ${cameras.length + 1}`;
+            
+            if (!code) {
+                alert('Please enter a camera code');
+                return;
+            }
+
+            // Check if camera already exists
+            if (cameras.some(cam => cam.code === code)) {
+                alert('This camera is already added');
+                return;
+            }
+
+            const camera = { code, name };
+            cameras.push(camera);
+            localStorage.setItem('cameras', JSON.stringify(cameras));
+            
+            createCameraElement(camera);
+            
+            // Clear inputs
+            document.getElementById('cameraCode').value = '';
+            document.getElementById('cameraName').value = '';
+        }
+
+        function removeCamera(code) {
+            cameras = cameras.filter(cam => cam.code !== code);
+            localStorage.setItem('cameras', JSON.stringify(cameras));
+            document.querySelector(`[data-camera="${code}"]`).remove();
+        }
+
+        function createCameraElement(camera) {
+            const div = document.createElement('div');
+            div.className = 'camera-box';
+            div.setAttribute('data-camera', camera.code);
+            
+            div.innerHTML = `
+                <div class="camera-header">
+                    <h3>${camera.name}</h3>
+                    <button class="remove-btn" onclick="removeCamera('${camera.code}')">Remove</button>
+                </div>
+                <video id="video-${camera.code}" autoplay playsinline></video>
+            `;
+            
+            document.getElementById('cameraGrid').appendChild(div);
+            initializeConnection(camera.code);
+        }
+
+        function initializeConnection(cameraCode) {
+            const drone = new ScaleDrone('yiS12Ts5RdNhebyM');
+            const roomName = 'cam-' + cameraCode;
+            let pc;
+
+            drone.on('open', error => {
+                if (error) {
+                    console.error(error);
+                    return;
+                }
+
+                const room = drone.subscribe(roomName);
+                
+                room.on('open', error => {
+                    if (error) console.error(error);
+                });
+
+                room.on('data', (message, client) => {
+                    if (client.id === drone.clientId) return;
+
+                    if (message.sdp) {
+                        handleRemoteSDP(message.sdp);
+                    } else if (message.candidate) {
+                        handleIceCandidate(message.candidate);
+                    }
+                });
+            });
+
+            function handleRemoteSDP(sdp) {
+                const videoElement = document.getElementById(`video-${cameraCode}`);
+                
+                pc = new RTCPeerConnection({
+                    iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
+                });
+
+                pc.ontrack = event => {
+                    const stream = event.streams[0];
+                    if (!videoElement.srcObject || videoElement.srcObject.id !== stream.id) {
+                        videoElement.srcObject = stream;
+                    }
+                };
+
+                pc.onicecandidate = event => {
+                    if (event.candidate) {
+                        drone.publish({
+                            room: roomName,
+                            message: { candidate: event.candidate }
+                        });
+                    }
+                };
+pc.setRemoteDescription(new RTCSessionDescription(sdp))
+                    .then(() => {
+                        if (sdp.type === 'offer') {
+                            return pc.createAnswer();
+                        }
+                    })
+                    .then(answer => {
+                        if (answer) {
+                            return pc.setLocalDescription(answer);
+                        }
+                    })
+                    .then(() => {
+                        if (pc.localDescription) {
+                            drone.publish({
+                                room: roomName,
+                                message: { sdp: pc.localDescription }
+                            });
+                        }
+                    })
+                    .catch(error => console.error('Error handling SDP:', error));
+            }
+
+            function handleIceCandidate(candidate) {
+                if (pc) {
+                    pc.addIceCandidate(new RTCIceCandidate(candidate))
+                        .catch(error => console.error('Error adding ICE candidate:', error));
+                }
+            }
+        }
+
+        // Load existing cameras on page load
+        window.onload = () => {
+            cameras.forEach(camera => createCameraElement(camera));
+        };
+
+        // Handle errors for video elements
+        document.addEventListener('error', function(e) {
+            if (e.target.tagName === 'VIDEO') {
+                console.error('Video error:', e);
+                e.target.style.backgroundColor = '#ffebee';
+            }
+        }, true);
+
+        // Cleanup on page unload
+        window.onbeforeunload = () => {
+            cameras.forEach(camera => {
+                const videoElement = document.getElementById(`video-${camera.code}`);
+                if (videoElement && videoElement.srcObject) {
+                    videoElement.srcObject.getTracks().forEach(track => track.stop());
+                }
+            });
+        };
+    </script>
+</body>
+</html>

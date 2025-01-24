@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JARVIS - Just A Rather Very Intelligent System</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Exo 2', sans-serif;
+            background-color: #000;
+            color: #00BFFF;
+            overflow: hidden;
+        }
+        #jarvis-interface {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle, #001F3F 0%, #000000 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #hologram {
+            width: 300px;
+            height: 300px;
+            border: 2px solid #00BFFF;
+            border-radius: 50%;
+            position: relative;
+            animation: pulse 2s infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #arc-reactor {
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 191, 255, 0.4); }
+            70% { box-shadow: 0 0 0 50px rgba(0, 191, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 191, 255, 0); }
+        }
+        #chatbot {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 600px;
+            background-color: rgba(0, 31, 63, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            color: #00BFFF;
+        }
+        #chat-messages {
+            height: 500px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+        #chat-input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(0, 191, 255, 0.1);
+            color: #00BFFF;
+        }
+        .info-panel {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 300px;
+            background-color: rgba(0, 31, 63, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            color: #00BFFF;
+        }
+        .info-item {
+            margin-bottom: 20px;
+        }
+        .info-item h3 {
+            margin-bottom: 5px;
+        }
+        .info-item p {
+            font-size: 0.9em;
+            margin: 0;
+        }
+        #market-data {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 300px;
+            background-color: rgba(0, 31, 63, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            color: #00BFFF;
+        }
+        .market-item {
+            margin-bottom: 10px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="jarvis-interface">
+        <div id="hologram">
+            <img src="arc-reactor.jpg" alt="Arc Reactor" id="arc-reactor">
+        </div>
+        <div id="chatbot">
+            <div id="chat-messages"></div>
+            <input type="text" id="chat-input" placeholder="Ask JARVIS anything...">
+        </div>
+        
+        <div class="info-panel">
+            <div class="info-item">
+                <h3>Highly Personalized Automation</h3>
+                <p>JARVIS offers a deeply customizable smart home experience, tailoring functionality to individual preferences and behaviors, unlike generic solutions that provide one-size-fits-all automation.</p>
+            </div>
+            <div class="info-item">
+                <h3>Enhanced Security and Privacy</h3>
+                <p>Operates autonomously with robust data protection measures, minimizing reliance on external servers and reducing potential privacy risks compared to current systems like Alexa and Google Home.</p>
+            </div>
+            <div class="info-item">
+                <h3>Comprehensive Device Integration</h3>
+                <p>Seamlessly connects with a broad range of devices and systems, providing an all-encompassing solution for home and business automation, overcoming the limitations of existing smart assistants.</p>
+            </div>
+        </div>
+
+        <div id="market-data">
+            <h3>Market Analysis</h3>
+            <div class="market-item">
+                <strong>TAM:</strong> $95 billion USD (Global home automation market, 2024)
+            </div>
+            <div class="market-item">
+                <strong>SAM:</strong> $2.5-3 billion USD (Indian home automation market)
+            </div>
+            <div class="market-item">
+                <strong>SOM:</strong> Initial aim to capture 1% of TAM
+            </div>
+        </div>
+    </div>
+
+    <script>
+const chatInput = document.getElementById('chat-input');
+const chatMessages = document.getElementById('chat-messages');
+const hologram = document.getElementById('hologram');
+
+let conversationHistory = [];
+const TOGETHER_API_KEY = 'd64fa560a12a4ad9cfa423a368cda858d86c403c6ffc6a4cff31457bbc225fe9'; // Replace with your Together.xyz API key
+
+const PRODUCT_INFO = {
+    introduction: "Imagine a home where technology understands you perfectly – welcome to JARVIS, the future of personal automation. JARVIS is a smart home automation system that acts like a personal assistant for your home or office.",
+    features: {
+        highlyPersonalized: "JARVIS offers a deeply customizable smart home experience, tailoring functionality to individual preferences and behaviors, unlike generic solutions that provide one-size-fits-all automation.",
+        enhancedSecurity: "Operates autonomously with robust data protection measures, minimizing reliance on external servers and reducing potential privacy risks compared to current systems like Alexa and Google Home.",
+        deviceIntegration: "Seamlessly connects with a broad range of devices and systems, providing an all-encompassing solution for home and business automation, overcoming the limitations of existing smart assistants."
+    },
+    privacyFocus: "Your data is secure with JARVIS, as it’s designed to ensure your information stays private and protected. Also, it won’t be sending data to unknown servers because your data will be saved on your local home server.",
+    futureVision: "The goal is to make JARVIS a central, intelligent part of every home or office, offering a tailored and efficient experience.",
+    marketAnalysis: {
+        TAM: "$95 billion USD (Global home automation market, 2024)",
+        SAM: "$2.5-3 billion USD (Indian home automation market)",
+        SOM: "Initial aim to capture 1% of TAM"
+    },
+    competitorAnalysis: "Although Google and Alexa are dominating the market, there are still many areas for improvement. 60% of people are somewhat hesitant towards trying out newer products, but once trust is gained, there's no turning back."
+};
+
+chatInput.addEventListener('keypress', async function(e) {
+    if (e.key === 'Enter') {
+        const userMessage = this.value.trim();
+        if (userMessage) {
+            addMessage('You', userMessage);
+            conversationHistory.push({ role: 'user', content: userMessage });
+            this.value = '';
+
+            // Animate hologram
+            hologram.style.animation = 'none';
+            hologram.offsetHeight; // Trigger reflow
+            hologram.style.animation = 'pulse 2s infinite';
+
+            try {
+                const jarvisResponse = await getJarvisResponse(userMessage);
+                addMessage('JARVIS', jarvisResponse);
+                conversationHistory.push({ role: 'assistant', content: jarvisResponse });
+            } catch (error) {
+                addMessage('JARVIS', "Sorry, I'm having trouble processing your request right now.");
+                console.error(error);
+            }
+
+            // Limit conversation history to last 50 messages to prevent token limit issues
+                if (conversationHistory.length > 50) {
+                    conversationHistory = conversationHistory.slice(-50);
+                }
+            }
+        }
+    });
+
+function addMessage(sender, message) {
+    const messageElement = document.createElement('p');
+    messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+    chatMessages.appendChild(messageElement);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+async function getJarvisResponse(userMessage) {
+    // Basic responses based on keywords and phrases
+    const lowerCaseMessage = userMessage.toLowerCase();
+    if (lowerCaseMessage.includes('personalized') || lowerCaseMessage.includes('automation')) {
+        return PRODUCT_INFO.features.highlyPersonalized;
+    } else if (lowerCaseMessage.includes('security') || lowerCaseMessage.includes('privacy')) {
+        return PRODUCT_INFO.enhancedSecurity;
+    } else if (lowerCaseMessage.includes('integration') || lowerCaseMessage.includes('devices')) {
+        return PRODUCT_INFO.deviceIntegration;
+    } else if (lowerCaseMessage.includes('privacy')) {
+        return PRODUCT_INFO.privacyFocus;
+    } else if (lowerCaseMessage.includes('future') || lowerCaseMessage.includes('vision')) {
+        return PRODUCT_INFO.futureVision;
+    } else if (lowerCaseMessage.includes('market') || lowerCaseMessage.includes('analysis')) {
+        return `Market Analysis:\nTAM: ${PRODUCT_INFO.marketAnalysis.TAM}\nSAM: ${PRODUCT_INFO.marketAnalysis.SAM}\nSOM: ${PRODUCT_INFO.marketAnalysis.SOM}`;
+    } else if (lowerCaseMessage.includes('competitor') || lowerCaseMessage.includes('analysis')) {
+        return PRODUCT_INFO.competitorAnalysis;
+    } else {
+        // If the message doesn't match any predefined keywords
+        return "I'm here to help with information about JARVIS. Feel free to ask about its features, security, device integration, market analysis, or any other details!";
+    }
+}
+
+// Add initial JARVIS greeting
+addMessage('JARVIS', "Welcome to JARVIS - Just A Rather Very Intelligent System. I'm here to assist you with personalized home automation. How may I help you today?");
+</script>
+</body>
+</html>

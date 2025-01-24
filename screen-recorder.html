@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screen Recorder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        #recordedVideo {
+            max-width: 800px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Screen Recorder</h1>
+    <div>
+        <button id="startBtn">Start Recording</button>
+        <button id="downloadBtn" disabled>Download Recording</button>
+    </div>
+    <div>
+        <label>
+            <input type="checkbox" id="systemAudioCheckbox"> Record System Audio
+        </label>
+        <label>
+            <input type="checkbox" id="micAudioCheckbox"> Record Microphone Audio
+        </label>
+    </div>
+    <video id="recordedVideo" controls></video>
+
+    <script>
+        const startBtn = document.getElementById('startBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const recordedVideo = document.getElementById('recordedVideo');
+        const systemAudioCheckbox = document.getElementById('systemAudioCheckbox');
+        const micAudioCheckbox = document.getElementById('micAudioCheckbox');
+
+        let mediaRecorder;
+        let recordedChunks = [];
+
+        startBtn.addEventListener('click', startRecording);
+        downloadBtn.addEventListener('click', downloadRecording);
+
+        async function startRecording() {
+            recordedChunks = [];
+            const options = {
+                video: {
+                    cursor: "always"
+                },
+                audio: {
+                    echoCancellation: true,
+                    noiseSuppression: true,
+                    sampleRate: 44100
+                }
+            };
+
+            if (systemAudioCheckbox.checked) {
+                options.audio.systemAudio = "include";
+            }
+
+            if (micAudioCheckbox.checked) {
+                options.audio.microphoneAudio = "include";
+            }
+
+            try {
+                const stream = await navigator.mediaDevices.getDisplayMedia(options);
+
+                mediaRecorder = new MediaRecorder(stream);
+
+                mediaRecorder.ondataavailable = (event) => {
+                    if (event.data.size > 0) {
+                        recordedChunks.push(event.data);
+                    }
+                };
+
+                mediaRecorder.onstop = () => {
+                    const blob = new Blob(recordedChunks, {
+                        type: 'video/webm'
+                    });
+                    recordedVideo.src = URL.createObjectURL(blob);
+                    downloadBtn.disabled = false;
+                };
+
+                mediaRecorder.start();
+                startBtn.disabled = true;
+
+                stream.getVideoTracks()[0].onended = () => {
+                    mediaRecorder.stop();
+                    startBtn.disabled = false;
+                };
+            } catch (err) {
+                console.error("Error: " + err);
+            }
+        }
+
+        function downloadRecording() {
+            const blob = new Blob(recordedChunks, {
+                type: 'video/webm'
+            });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            document.body.appendChild(a);
+            a.style = 'display: none';
+            a.href = url;
+            a.download = 'screen-recording.webm';
+            a.click();
+            window.URL.revokeObjectURL(url);
+            }
+    </script>
+</body>
+</html>

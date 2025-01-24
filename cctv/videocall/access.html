@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Live Video Feed</title>
+</head>
+<body>
+    <h1>Access Live Video Feed</h1>
+    <input type="text" id="feedCodeInput" placeholder="Enter Feed Code">
+    <button onclick="accessFeed()">Access Feed</button>
+    <br>
+    <video id="remoteVideo" autoplay style="width: 640px; height: 480px;"></video>
+
+    <script>
+        let peerConnection;
+        const signalingServer = "signaling.php";
+
+        async function accessFeed() {
+            const feedCode = document.getElementById('feedCodeInput').value;
+            if (!feedCode) {
+                alert('Please enter a feed code');
+return;
+            }
+
+            const configuration = {
+                iceServers: [
+                    { urls: 'stun:stun.l.google.com:19302' }
+                ]
+            };
+
+            try {
+                peerConnection = new RTCPeerConnection(configuration);
+
+                peerConnection.ontrack = event => {
+                    const remoteVideo = document.getElementById('remoteVideo');
+                    if (remoteVideo.srcObject !== event.streams[0]) {
+                        remoteVideo.srcObject = event.streams[0];
+                        console.log('Received remote stream');
+                    }
+                };
+
+                peerConnection.onicecandidate = event => {
+                    if (event.candidate) {
+                        fetch(`${signalingServer}?action=candidate&code=${feedCode}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ candidate: event.candidate })
+                        });
+                    }
+                };
+
+                // Get the offer from the server
+                const response = await fetch(`${signalingServer}?action=join&code=${feedCode}`);
+                const data = await response.json();
+
+                if (data.error) {
+                    alert('Feed not found or error occurred');
+                    return;
+                }
+
+                if (data.offer) {
+                    await peerConnection.setRemoteDescription(new RTCSessionDescription(data.offer));
+                    
+                    const answer = await peerConnection.createAnswer();
+                    await peerConnection.setLocalDescription(answer);
+
+                    await fetch(`${signalingServer}?action=answer&code=${feedCode}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ answer: answer })
+                    });
+
+                    // Poll for ICE candidates
+                    pollICECandidates(feedCode);
+                }
+            } catch (error) {
+                console.error('Error accessing feed:', error);
+                alert('Error accessing feed. Please try again.');
+            }
+        }
+
+        function pollICECandidates(feedCode) {
+            setInterval(async () => {
+                try {
+                    const response = await fetch(`${signalingServer}?action=getCandidate&code=${feedCode}`);
+                    const data = await response.json();
+                    
+                    if (data.candidates && data.candidates.length > 0) {
+                        for (const candidate of data.candidates) {
+                            try {
+                                await peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
+                            } catch (e) {
+                                console.error('Error adding ICE candidate:', e);
+                            }
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error polling ICE candidates:', error);
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

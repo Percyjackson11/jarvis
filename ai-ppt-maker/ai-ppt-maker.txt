@@ -1,0 +1,31 @@
+enter topic - will create presentation
+each slide treated as html page so will treat it as that and give code. 
+add relevant images, style automatically, allow to edit manually.
+each slide / 2-3 slides / piece of selected elements can be redesigned by selecting and giving prompt to ai to update.
+will automatically write footnotes while creating slides.
+will create several designs for each slide which we can use what we like
+will create data, charts, tables, anything relevant to data on a slide
+can also create ppt on given text piece using that as reference
+add transition effects between two slides
+any way ai will be able to add on - text expansion, etc taking previous slides in reference.
+can ask it to expand or detail slides or add more diagrams, figures or data.
+
+
+using this api:
+async function getJarvisResponse(userMessage) {
+    const response = await fetch('https://api.together.xyz/chat/completions', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${TOGETHER_API_KEY}`
+        },
+        body: JSON.stringify({
+            model: 'meta-llama/Llama-3-70b-chat-hf',
+            messages: conversationHistory
+        })
+    });
+
+    const result = await response.json();
+    return result.choices[0].message.content;
+}
+i want to make an ai ppt maker in html. my thought is that I can first ask for text/idea on which to base the ppt on, then ask the llm to create basic structure of presentation slide by slide, based on that text. then ask it to create html code of each slide - adding as much tables, charts, data diagrams or images for it as possible. and then add a universal theme/design to each slide. "ppt" right now im thinking to be a collection of individual html slides. Can you create this prototype for me? thanks!

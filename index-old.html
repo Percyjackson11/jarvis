@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JARVIS - Just A Rather Very Intelligent System</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Exo 2', sans-serif;
+            background-color: #000;
+            color: #00BFFF;
+            overflow: hidden;
+        }
+        #jarvis-interface {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle, #001F3F 0%, #000000 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+#hologram {
+    width: 300px;
+    height: 300px;
+    border: 2px solid #00BFFF;
+    border-radius: 50%;
+    position: relative;
+    animation: pulse 2s infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#arc-reactor {
+    width: 100%; /* Adjust size as needed */
+    height: auto;
+    border-radius: 50%;
+}
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 191, 255, 0.4); }
+            70% { box-shadow: 0 0 0 50px rgba(0, 191, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 191, 255, 0); }
+        }
+        #chatbot {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 600px;
+            background-color: rgba(0, 31, 63, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            color: #00BFFF;
+        }
+        #chat-messages {
+            height: 200px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+        #chat-input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(0, 191, 255, 0.1);
+            color: #00BFFF;
+        }
+        .info-panel {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 300px;
+            background-color: rgba(0, 31, 63, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            color: #00BFFF;
+        }
+        .info-item {
+            margin-bottom: 20px;
+        }
+        .info-item h3 {
+            margin-bottom: 5px;
+        }
+        .info-item p {
+            font-size: 0.9em;
+            margin: 0;
+        }
+        #market-data {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 300px;
+            background-color: rgba(0, 31, 63, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            color: #00BFFF;
+        }
+        .market-item {
+            margin-bottom: 10px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="jarvis-interface">
+        <div id="hologram">
+            <img src="arc-reactor.jpg" alt="Arc Reactor" id="arc-reactor">
+        </div>
+<div id="chatbot">
+            <div id="chat-messages"></div>
+            <input type="text" id="chat-input" placeholder="Ask JARVIS anything...">
+        </div>
+        
+        <div class="info-panel">
+            <div class="info-item">
+                <h3>Highly Personalized Automation</h3>
+                <p>JARVIS offers a deeply customizable smart home experience, tailoring functionality to individual preferences and behaviors.</p>
+            </div>
+            <div class="info-item">
+                <h3>Enhanced Security and Privacy</h3>
+                <p>Operates autonomously with robust data protection measures, minimizing reliance on external servers and reducing potential privacy risks.</p>
+            </div>
+            <div class="info-item">
+                <h3>Comprehensive Device Integration</h3>
+                <p>Seamlessly connects with a broad range of devices and systems, providing an all-encompassing solution for home and business automation.</p>
+            </div>
+        </div>
+
+        <div id="market-data">
+            <h3>Market Analysis</h3>
+            <div class="market-item">
+                <strong>TAM:</strong> $95 billion USD (Global home automation market, 2024)
+            </div>
+            <div class="market-item">
+                <strong>SAM:</strong> $2.5-3 billion USD (Indian home automation market)
+            </div>
+            <div class="market-item">
+                <strong>SOM:</strong> Initial aim to capture 1% of TAM
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const chatInput = document.getElementById('chat-input');
+        const chatMessages = document.getElementById('chat-messages');
+        const hologram = document.getElementById('hologram');
+
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const userMessage = this.value;
+                addMessage('You', userMessage);
+                this.value = '';
+                
+                // Simulate JARVIS response
+                setTimeout(() => {
+                    const jarvisResponse = getJarvisResponse(userMessage);
+                    addMessage('JARVIS', jarvisResponse);
+                }, 1000);
+
+                // Animate hologram
+                hologram.style.animation = 'none';
+                hologram.offsetHeight; // Trigger reflow
+                hologram.style.animation = 'pulse 2s infinite';
+            }
+        });
+
+        function addMessage(sender, message) {
+            const messageElement = document.createElement('p');
+            messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function getJarvisResponse(userMessage) {
+            const responses = [
+                "I'm analyzing your request. JARVIS is designed to offer highly personalized automation tailored to your preferences.",
+                "Certainly. Your privacy and security are our top priorities. All data is processed locally to ensure maximum protection.",
+                "I can help with that. JARVIS integrates seamlessly with a wide range of devices and systems in your home or office.",
+                "Based on current market analysis, the global home automation market is valued at approximately $95 billion USD.",
+                "Our initial goal is to capture 1% of the Total Addressable Market, showcasing JARVIS's potential for growth.",
+                "JARVIS is not just a product, it's a vision for the future of personal automation. How else can I assist you today?",
+                "I'm continuously learning and adapting to provide you with the best possible automation experience.",
+                "Would you like me to explain more about how JARVIS enhances home security?",
+                "I can provide more details on how JARVIS integrates with various smart home devices. What specific area are you interested in?",
+                "Is there any particular feature of JARVIS you'd like more information about?"
+            ];
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+
+        // Add initial JARVIS greeting
+addMessage('JARVIS', "Welcome to JARVIS - Just A Rather Very Intelligent System. I'm here to assist you with personalized home automation. How may I help you today?");
+
+        // Add some visual effects
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.position = 'absolute';
+            particle.style.width = '2px';
+            particle.style.height = '2px';
+            particle.style.background = '#00BFFF';
+            particle.style.borderRadius = '50%';
+            particle.style.pointerEvents = 'none';
+            particle.style.transition = 'all 1s ease-out';
+            
+            const startX = Math.random() * window.innerWidth;
+            const startY = Math.random() * window.innerHeight;
+            const endX = Math.random() * window.innerWidth;
+            const endY = Math.random() * window.innerHeight;
+            
+            particle.style.left = `${startX}px`;
+            particle.style.top = `${startY}px`;
+            
+            document.body.appendChild(particle);
+            
+            setTimeout(() => {
+                particle.style.left = `${endX}px`;
+                particle.style.top = `${endY}px`;
+                particle.style.opacity = '0';
+            }, 100);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 1000);
+        }
+
+        setInterval(createParticle, 200);
+
+        // Dynamic content rotation for info panel
+        const infoItems = document.querySelectorAll('.info-item');
+        let currentInfoItem = 0;
+
+        function rotateInfoItems() {
+            infoItems[currentInfoItem].style.display = 'none';
+            currentInfoItem = (currentInfoItem + 1) % infoItems.length;
+            infoItems[currentInfoItem].style.display = 'block';
+        }
+
+        // Initially hide all but the first info item
+        for (let i = 1; i < infoItems.length; i++) {
+            infoItems[i].style.display = 'none';
+        }
+
+        setInterval(rotateInfoItems, 10000); // Rotate every 10 seconds
+
+        // Add hover effect to hologram
+        hologram.addEventListener('mouseover', () => {
+            hologram.style.boxShadow = '0 0 50px #00BFFF';
+        });
+
+        hologram.addEventListener('mouseout', () => {
+            hologram.style.boxShadow = 'none';
+        });
+
+        // Add a typing effect to JARVIS responses
+        function typeWriter(text, element, speed = 50) {
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Modify addMessage function to use typeWriter for JARVIS responses
+        function addMessage(sender, message) {
+            const messageElement = document.createElement('p');
+            messageElement.innerHTML = `<strong>${sender}:</strong> `;
+            chatMessages.appendChild(messageElement);
+            
+            if (sender === 'JARVIS') {
+                typeWriter(message, messageElement);
+            } else {
+                messageElement.innerHTML += message;
+            }
+            
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+    </script>
+</body>
+</html>

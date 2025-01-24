@@ -1,0 +1,13 @@
+Looking at the source code of youtube-transcript-api, it seems pretty straightforward.
+
+    Send a Get Request to YouTube video URL e.g. https://www.youtube.com/watch?v=R0hAI0qUvmk
+    Search for "captionTracks" in the response. You can use any HTML parser for this
+    First item in the captionTracks JSON/Dictionary like structure is baseURL, which looks like this
+    https://www.youtube.com/api/timedtext?v=R0hAI0qUvmk\u0026caps=asr\u0026opi=112496729\u0026xoaf=5\u0026hl=ur\u0026ip=0.0.0.0\u0026ipbits=0\u0026expire=1687732221\u0026sparams=ip,ipbits,expire,v,caps,opi,xoaf\u0026signature=8E3DD9D76DA864ACF6947F759695C6917A6B5A8E.46267D5DCE9449DF7EDAFB4F3492503D8CD55C1C\u0026key=yt8\u0026kind=asr\u0026lang=en
+    Decode the Unicode either using a tool like this, or in python like this:
+
+from html import unescape
+url = unescape(baseURL) 
+
+Basically just replace \u0026 with & sign. In this case, it looks like this https://www.youtube.com/api/timedtext?v=yCmBMO4hvaA&caps=asr&opi=112496729&xoaf=4&hl=ur&ip=0.0.0.0&ipbits=0&expire=1687730845&sparams=ip,ipbits,expire,v,caps,opi,xoaf&signature=BA99CEA6951B2D155A290B55020E423AB776F639.77C0AD10AF2C02987AA97015288FE7E15244B15D&key=yt8&kind=asr&lang=en
+Go to this URL and you should have your captions.

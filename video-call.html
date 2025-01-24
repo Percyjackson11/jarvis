@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Video Calling App</title>
+  </head>
+  <body>
+    <div id="localVideo"></div>
+    <div id="remoteVideo"></div>
+    <button id="startCallBtn">Start Call</button>
+    <button id="endCallBtn">End Call</button>
+  </body>
+  <script>
+  	// Get references to the HTML elements
+const localVideo = document.getElementById('localVideo');
+const remoteVideo = document.getElementById('remoteVideo');
+const startCallBtn = document.getElementById('startCallBtn');
+const endCallBtn = document.getElementById('endCallBtn');
+
+// Set up the WebRTC connection
+const configuration = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
+const peerConnection = new RTCPeerConnection(configuration);
+
+// Set up the local video stream
+navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+  .then(stream => {
+    localVideo.srcObject = stream;
+    stream.getTracks().forEach(track => peerConnection.addTrack(track, stream));
+  })
+  .catch(error => console.log(error));
+
+// Set up the remote video stream
+peerConnection.ontrack = event => {
+  remoteVideo.srcObject = event.streams[0];
+};
+
+// Start the call
+startCallBtn.addEventListener('click', () => {
+  // Get the remote user's ID (in a real app, this would come from the server or be entered by the user)
+  const remoteUserId = '123456789';
+
+  // Create an offer
+  peerConnection.createOffer()
+    .then(offer => peerConnection.setLocalDescription(offer))
+    .then(() => {
+      // Send the offer to the remote user (in a real app, this would be done via a signaling server)
+      const offerData = { offer: peerConnection.localDescription, userId: remoteUserId };
+      console.log('Sending offer:', offerData);
+    })
+    .catch(error => console.log(error));
+});
+
+// End the call
+endCallBtn.addEventListener('click', () => {
+  // Close the connection
+  peerConnection.close();
+
+  // Reset the video feeds
+  localVideo.srcObject = null;
+  remoteVideo.srcObject = null;
+});
+
+  </script>
+</html>

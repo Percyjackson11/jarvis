@@ -1,0 +1,2592 @@
+because software runs the world and open
+source software has eaten software and
+so far as it&#39;s almost all open
+source the stakes have never been higher
+[Music]
+[Music]
+welcome back to the freeo camp podcast
+I&#39;m Quincy Larsson teacher and founder
+of freecodecamp.org each week we&#39;re
+bringing you Insight from developers
+Founders and ambitious people in Tech
+and this week we are talking with Adam
+stovak and Jared Santo Co hosts of the
+change log the longest running software
+podcast in the world Mah they interview
+devs each week about open source
+projects and they also have a weekly
+news episode that I always listen to
+five years ago I interviewed them for
+their 10th anniversary episode and now
+I&#39;m back catching up on what they&#39;ve
+been up to for the last five years Adam
+Jared welcome to the
+show thank you five years man happy to
+be here the last time I was in person
+yeah it was that wasun literally in
+person and I said literally the correct
+way that&#39;s right we were literally in
+the same room unlike today we&#39;re
+digitized mhm that was a good time
+though more logistical hassle than this
+right this was easy button yeah yeah I
+mean we&#39;re we&#39;re busy grown-ups with
+kids and stuff and uh this is a
+practical way that we can come together
+and uh share it Tails right I think uh
+Jared daylighted into Houston last time
+you drove down from Plano right were you
+inas Texas right by Dallas now I live in
+Austin now so I don&#39;t know if that&#39;s oh
+I didn&#39;t know you moved yeah yeah yeah
+that&#39;s what happens since five years a
+lot of happens right yeah well let first
+of all everybody uh after you listen to
+this uh the short story the 10 years of
+history and I&#39;ll just recall to the best
+of my
+ability first um you all like Adam
+started this podcast got a lot of
+initial traction start Ed to uh kind of
+wne a little bit in motivation it was
+feeling listless Jared swoops in gives
+him that renewed shot in the arm and
+then together you form the perfect team
+to drive forward and like expand and
+create all these additional podcasts and
+uh yeah like I mean you go to all these
+big conferences you interview all these
+big developers in Tech uh I&#39;ve learned
+so much from listening to your podcast
+over the many many years like basically
+since uh its Inception I think like uh
+forever ago yeah like like at least like
+probably like around 2010 is when I
+started listening 2011 yeah yeah uh I
+don&#39;t know I&#39;ve probably listened like
+more than 100 episodes of the change log
+um so yeah uh that is the the brief
+history um how many years did you say
+how many years 2010 no how many years
+did you say we&#39;ve been doing this 15
+years
+okay yeah did you forget Adam 15 I
+thought he said 10 this is our
+extravagan so I was recapping PR the
+previous podcast people should still go
+listen to that but I don&#39;t want them to
+leave and go listen to that right now
+don&#39;t leave don&#39;t go anywhere we&#39;re here
+now you know that&#39;s ancient history and
+as you can probably tell from listening
+to this podcast is largely
+extemporaneous and unscripted and we
+don&#39;t do any editing because I want to
+preserve the authenticity in capture of
+the real Adam and the real Jared zero
+edits no matter what I say he&#39;s got to
+put it out there it&#39;s got to go it&#39;s got
+to go out yeah that&#39;s a lot of danger
+there Quincy yeah and also this is the
+first time I think I&#39;ve ever had three
+people on the podcast oh really like so
+there&#39;s going to be a little bit more
+interruption than normal um but uh we&#39;re
+we&#39;re in for some exciting tales of the
+past years true though that&#39;s not true
+when the last time we were on the show
+it was the three of us yeah I guess it&#39;s
+true that was like that was like an old
+version of free code Camp though like
+this is the new free code Camp podcast
+the way he does it right with the bass
+the bass guitar and everything it&#39;s all
+now more free yeah and we got video now
+we&#39;re we&#39;re on YouTube and on uh RSS so
+like Spotify and apple music I&#39;ll stop
+being I&#39;ll stop being silly I&#39;ll be Ser
+kind of back checking him over here
+giving him a hard time sorry just just
+getting out of my shell no I I like that
+I like call I got motion motion creates
+emotion you know there is one episode in
+the history of the free cing podcast
+that it&#39;s had more than two guests and
+it was more more than two people and
+that was you and now you&#39;re wow honored
+honor thanks Quincy yeah so let&#39;s just
+dive right into it so so we talk about
+the history of the change log and
+everything let&#39;s talk about what&#39;s
+changed things are changing uh open
+source is changing there are some like
+serious undercurrents of uh you know
+unrest within open source there&#39;s some
+corporate greed in open source there&#39;s a
+lot of clo and Dagger uh you know drama
+maybe you can talk a little bit about
+that goodness gracious so back in the
+day everything was more Kumbaya you know
+you put your stuff out there you were
+happy if anybody used it
+and then turns out people do use it and
+they use it a lot and when they use your
+software they want improvements to your
+software and at first as open source
+developers that feels good and you&#39;re
+happy to help and you&#39;re just amazed
+that somebody finds value in in this
+gift that you gave to the world and so
+you you want to polish it up you know
+like every issue every feature request
+you consider and merge you know pull
+requests all this kind of stuff and then
+eventually what happens and we&#39;ve seen
+it a lot of our friends a lot of our
+guests on the show over and over and
+over again they start to get bogged down
+in the M of managing this gift that
+they&#39;ve given to the world and feeling
+guilty that it&#39;s not better or there&#39;s a
+bug or doesn&#39;t do that thing that
+somebody else needs it to do and turns
+out that&#39;s like a really good way as a
+capitalistic organization
+to make more money is to have somebody
+else work on software that you use for
+free and that relation get that
+relationship gets really strenuous
+intense over time and
+so we&#39;ve grown up the industry has
+matured the you said corporate greed has
+been here it&#39;s not like it&#39;s new in 2024
+but it&#39;s just gotten metastasized
+perhaps and there&#39;s been a lot of
+Fallout from that there&#39;s been a lot of
+people who&#39;ve just burnt out and left
+there&#39;s been projects that have changed
+hands into unscrupulous owners uh
+there&#39;s been a lots of stuff that&#39;s
+happened as a result of that tension and
+we haven&#39;t had we haven&#39;t found a
+sustainable good way of resolving that
+conflict yet we&#39;re trying lots of things
+there&#39;s sustainability efforts there&#39;s
+donate buttons
+there&#39;s different models you can apply
+but that I think is some somewhat
+defined open source over the last 5
+years is this tension between let&#39;s just
+call them the givers and the takers yeah
+that&#39;s an excellent way to frame it so
+the givers the takers givers being devs
+who are often you know just doing this
+as a side thing like they started the
+side project that one day they needed to
+scratch their own is they needed to
+create some library that does some
+specific thing and they built it and
+other people started using it too and
+then you know giant employers who have
+tons of uh resources at their disposals
+started using it too and not necessarily
+contributing back and thus becoming
+takers and I think it&#39;s totally fine for
+like an a you know a developer at a
+hackathon or somebody to like just grab
+some open source Library start using it
+right like that&#39;s that&#39;s totally coaster
+that&#39;s totally cool and that is just one
+Del helping another but when like a
+giant Fortune 500 company starts you
+know using it and not contributing
+anything back to the the ecosystem
+technically they&#39;re within the license
+to not do that right right but but it&#39;s
+not like super chill right like uh and I
+want to point out that there a lot of
+people who get paid by big corporations
+to go in and maintain open source code
+bases and help out maintainers and even
+sometimes take over projects and
+continue to maintain them but it doesn&#39;t
+always have this uh you know happy
+ending right or even like a happy middle
+happy second act there&#39;s just like
+tension throughout between as you said
+The Giver and the
+takers yeah and it
+because software runs the world and open
+source software has eaten software and
+so far as it&#39;s almost all open
+source the stakes have never been higher
+and so we see things like that happen
+such as the XZ
+vulnerability where a state actor
+actually tricked a burnt out Dev
+into was that XZ am I on the right one
+yeah okay it&#39;s tring so a a a highly
+motivated so it&#39;s hard to know yeah
+exactly a highly
+motivated very effective State
+actor longc con effectively it was a
+longc looking like a totally legitimate
+contributor a package maintainer and was
+able to take over the the release
+responsibilities of of XZ and almost had
+it not been for uh
+uh the what appears to be a coincident
+accident when somebody else noticed who
+was not trying to notice but they just
+happened to notice that this package had
+changed saved it from not affecting a
+whole lot of people to where this state
+act or whatever state it was we don&#39;t
+know would have had a back door into
+hundreds of thousands of machines around
+the world because of this and so the
+stakes are high now maybe they&#39;ve always
+been high but it just seems like it&#39;s
+more acute that just how high they
+really are yeah and just to give some
+context uh you know you say longc con
+this is like somebody who is being a
+productive open source contributor for
+you know maybe years uh who&#39;s gradually
+earning trust within the community of
+maintainers of that open source library
+and then one day they kind of slip some
+malicious code in there and this is a
+package that a lot of people are using
+it without even realizing they use it
+because it&#39;s so foundational to like
+like uh
+I mean it&#39;s like way buried deep several
+layers of abstraction away from what
+most developers are actually focusing on
+and they just you know mm install it or
+something like that right and
+uh and these systems being compromised I
+mean this could be hospitals this could
+be militaries governments uh this could
+be uh electricity companies like I mean
+you want to you hear about like
+ransomware attacks and stuff like that
+like just imagine the ability to deny
+service or to wreak havoc upon this and
+and also I wanted to find state Factor
+um that term if you&#39;re not familiar with
+the term it&#39;s like a security term but
+basically somebody who has like the
+blessing of a government like the
+Russian government is very notorious for
+subsidizing you know just cyber Riff
+Raff for like of word right like uh
+going out and like there are people that
+are paid to go out and try to penetrate
+systems and uh and basically cause chaos
+right uh North Korea like a huge portion
+of its budget comes from ransomware
+attacks and and other things that that
+uh they are able to do to essentially
+force uh law- abiding like hardworking
+people and companies that are doing
+legit stuff like running hospitals and
+stuff like that to hand over a bunch of
+money to them um so this is a big deal
+this is like potentially a very very big
+deal and I don&#39;t think enough uh credit
+was given to the dev who discovered I
+think like the the package size or or
+like the compilation time was like
+slightly longer just like they&#39;re
+running like the compilation I I think
+if I remember everything correctly
+they&#39;re running this process and they
+notice huh it&#39;s weird that that package
+takes like a few milliseconds longer
+than usual and so they got that&#39;s kind
+of hanky right and then they start
+diving in and that&#39;s when they
+discovered it and they unraveled the
+whole thing I thought it was a CPU cycle
+like running a little longer or
+something slower than usual I don&#39;t yeah
+so you&#39;re you&#39;re right on that detail
+I&#39;m not sure it was compile time or L
+there was lag Mill even like go only
+only developers would be so banic like
+thankfully though but that&#39;s how it
+works and how many times do you have
+this issue where you don&#39;t dig deep like
+this guy dug into it and
+unraveled an epic con right and probably
+saved the world from Millions if not
+billions of dollars of lost resources I
+mean it was who knows the ramifications
+had this back door been inside of XZ it
+may have stayed there for years it also
+makes me wonder how many back doors are
+still in there but you know how many
+times do we come across something and we
+don&#39;t actually have the time or the
+Curiosity to actually dig in and he did
+that and so it was actually an amazing
+story but
+a for it kind of foreshadows more fear
+because like I said like if that one was
+found
+accidentally how many are not found it&#39;s
+a pretty big deal yeah I mean we had
+like solar winds which is like a a
+similar supply chain attack uh huge like
+and and when we talk about Millions loss
+and productivity and stuff like like
+people would probably died like there
+will probably be people who were denied
+medical care because like the people
+couldn&#39;t log into their systems and like
+the ER was taking like an extra 20
+minutes per patient or something like
+that and somebody bled out right like
+like these are when when power goes out
+people die there are people that are on
+oxygen or ventilators or other things
+like that and and they so literal human
+suffering uh Beyond just near
+inconvenience of like
+that&#39;s a that&#39;s the thing that uh there
+was this TV show I really wish I can
+recall the name of it if you&#39;re a
+listener and you know it was in the 80s
+it was this show where they examined
+things like elevators this is New York
+City on a hustling buling you know New
+York minute evening kind of thing and
+here I am on the train and what happens
+if the power goes out now we&#39;re all
+stuck here like it was essentially
+describing how we as human beings have
+built technology tracks s so much so
+that they become critical to life like
+if you&#39;re stuck in an elevator and you
+literally can&#39;t get out for days you
+might die in an elevator like who who
+would ever think in their wildest minute
+how&#39;d you
+die I was stuck in an elevator for two
+days you know like that&#39;s funny in this
+podcast but very sad if that was a true
+thing but we have built ourselves in our
+in our evolving Society technology traps
+mhm and it&#39;s kind of fascinating to
+think
+about we create these things and then we
+rely upon the things that we
+create and they don&#39;t really rely and
+they also rely upon us in the in the
+sense of like they will stop running if
+we don&#39;t maintain them even this is the
+the conundrum of the open source
+developers like I created this thing I
+had no idea how wildly successful it was
+going to
+be maybe there&#39;s some free code camp
+analogies here and now I&#39;m just going to
+keep doing this thing for the rest of my
+life otherwise although in Quincy&#39;s case
+of course he&#39;s built this system and so
+that free code Camp can outlive him but
+a lot of these software
+systems very difficult to find somebody
+to take over your project when you&#39;re
+ready to move on it&#39;s such a hard
+problem because there&#39;s so much context
+that&#39;s
+required uh intention that&#39;s required
+skill right to find somebody to actually
+hand off a project to is a very
+complicated task in and of itself so you
+end up serving this thing that you
+created in the first place and it&#39;s just
+it&#39;s like you&#39;re as I told Adam as I
+used to say all the time we created Our
+Own Prison let&#39;s at least make it nice
+around here you know so are are we are
+we sad about this J like we we&#39;re
+talking pretty down about this you know
+generally like this like I did and you
+did and Quincy did so are we we kind of
+sad about the state of the world and the
+fact that we are in these I think our
+heart goes out to the individuals who
+are affected right and so because we&#39;re
+so close to those people as Internet
+people and as software people we know a
+lot of them so we think about it from
+that perspective a lot from their
+perspective of course the immense amount
+of value that&#39;s been gifted to the world
+has been
+amazing for in the lives of millions of
+people right like these systems that
+serve us
+can be better faster stronger Etc
+because of those gifts because we don&#39;t
+all have to go write our own XZ I mean
+if you think
+about a business that begins maybe a
+free code Camp grad certificate person
+full stack coming soon full stack what
+is it called Quincy full stack certif
+certified full stack developer yeah so a
+certified full stack developer goes
+through the grind of free code cam gets
+out on the other side and now has the
+ability
+with their own hands and their own mind
+and and skills they&#39;ve acquired to
+create a business from scratch right and
+they go and they rails new or they D
+Jango new whatever the equivalent is
+over there in the Django world or the
+next Js new whatever the equivalent is
+you know pick your Tech
+stack and now they have a business in
+like a few days right a website yeah an
+app an idea that&#39;s realized and they&#39;ve
+written maybe like like 3% maybe 5% of
+the code that runs that system just
+standing on the shoulders of all these
+giants like there&#39;s the upside that&#39;s
+the like that to me is still exciting
+I&#39;m happy about it I think it&#39;s
+amazing how you can go to do that for
+somebody and allow them Empower them to
+build their own future like that&#39;s what
+open source has done but there&#39;s also
+the downside so we talk about it all mhm
+yeah and you&#39;re going to have these
+people out there like these nation
+states now you you you listed off a
+couple different countries I could
+imagine now we live here in the United
+States I could imagine there&#39;s some
+version
+of State actors on behalf of the United
+States like we&#39;re out there doing
+versions I mean we did we did we do uh
+the Iran uh nuclear plant uh hack what
+was it stuck net was that us stck net I
+don&#39;t remember but but basically uh we
+figured out how to get um it it may have
+been uh like a joint effort between
+several countries but basically we
+wanted to Halt or slow down the Iran
+nuclear uh weapon enrichment program
+where they like you know enrich uranium
+so they can create their own nuclear
+weapons and stuff and the way we did it
+was we infected basically all the
+computers in the world with stuck net um
+and it had code that would only run when
+it was on like this these specific like
+computers that were in this otherwise
+air gapped um probably system
+within Iran and and caused their
+reactors to melt down um so software
+like how do you get software onto the
+most secure computer systems in the
+world you just get it on all the systems
+and then somebody accidentally transfers
+it to one of those extremely SEC systems
+but yes like I mean you could say you
+know we&#39;re the good guys and uh but but
+yeah we&#39;re we&#39;re engaging in things that
+you know you could argue are underhanded
+but we&#39;re doing it for the reasons of
+like furthering our own National
+interest right and I&#39;m sure there are
+plenty of people in Russia who think
+they&#39;re doing the exact same thing for
+Russia yeah when they&#39;re like Ransom
+wearing uh some Hospital in Omaha or
+something like that that they&#39;re um
+they&#39;re helping their country they&#39;re
+advancing their country&#39;s interests
+right um so yeah um what you&#39;re speaking
+to though is distribution right because
+open source did not win originally it
+had to win it had to become so
+ubiquitous ubiquitous popular beloved it
+you know it it it brings all the right
+things together not just
+Freedom uh to join the community but
+freedom to use the code how you&#39;d like
+obviously with a permissive license it
+brings in the role of law it brings in
+uh in some cases the allowances for
+trademark or all all cases allowances
+for trademark there&#39;s a lot of things
+that open source did that wasn&#39;t just
+simply the software but brought a lot of
+people together but more importantly
+what it offered
+in the end was this option to as you
+said Jared to stand on the shoulders of
+giants but then the ultimate thing it
+did was distribution for software so if
+most things or most rails news or react
+news or whatever it might be news begins
+with some version of Open Source well
+then you&#39;ve got a lot of dependencies a
+dependency tree transy dependencies Etc
+that are in there that you&#39;re not
+reading the lines of code of that is
+just coming along for the ride you know
+and you may not know what you&#39;re
+actually
+involved
+in and then that&#39;s distribution like you
+had said Quincy for stet this was an a
+us and Israel kind of thing I just llm
+this thing so I I got all the brain here
+but that was a US Israel thing to to
+stop the disruption of uh Iran&#39;s nuclear
+enrichment facilities which gosh all
+those words right there to speak
+political I don&#39;t want to say them
+anymore and this is a politics free zone
+we&#39;re going to talk
+we&#39;re talking about facts okay
+people but uh I will say that like um I
+mean the the I think the bottom line the
+gist of what we&#39;re saying is this open
+source software does matter and it is a
+huge point of vulnerability like in the
+US I looked it up a minute ago because
+you were mentioning people dying in
+elevators 30 Americans die in an
+elevator every year due to elevator
+malfunction you know like dropping or
+something like that right every year
+that is a like a horrific way to die and
+I mean we can look at like Boeing in the
+planes uh they been crashing right and
+and that&#39;s software engineering right
+like door flying off yeah there was
+cabin pressure issues a lot of that is
+not necessarily software but but like uh
+it&#39;s engineering yeah yeah but but like
+easy to think that like some Mission
+critical thing that is relying on a
+whole bunch of Open Source software
+because of budgetary considerations uh
+not invented here is a a crazy scary
+thing that like some uh CTO and
+Engineering managers will think like oh
+we need to build our own XYZ we need to
+roll our own XYZ and but the flip side
+of not invented hear syndrome which
+causes people to expend great resources
+reduplicating the work that&#39;s already
+been done in open source is just
+companies that are trying to save as
+much money as possible and therefore
+just grabbing stuff off the shelf and
+not really thinking not looking at the
+nutritional labels not really
+understanding what they&#39;re putting in
+their body there
+right yeah there&#39;s somewhere in the
+middle wherein lies most of us you know
+where where we should live is somewhere
+in that middle and of course because we
+have this propensity to find the
+extremes we go back and forth between
+what I call dependency hell uh on on the
+left for instance and on the far right
+you have I&#39;m not speaking political left
+and right just in this Continuum left
+and right and on the right you have this
+not invented here syndrome right where
+you&#39;re now having to cat up every line
+of code code in order to accomplish
+something because if I didn&#39;t invent it
+then I don&#39;t trust it and there&#39;s
+neither one of those places is a happy
+place you have to find that balance I
+think every business every developer has
+their own appetite where they should be
+on the Continuum but I think we&#39;ve
+learned that the closer you get to
+either one of those extremes you&#39;re non-
+optimal
+yeah 100% so what are some other big
+changes that you&#39;ve experienced in open
+source over the past 5 years and of
+course you all have had the per the
+benefit of time you were able to kind of
+like observe during the very early years
+of Open Source you actually had like the
+founders of GitHub on your show and
+stuff like that right um and and you
+were like in conversation as open source
+was going from something that was
+relatively inaccessible like people had
+to use like subversion or um you know I
+I don&#39;t even know the full history of
+Open Source and we won&#39;t necessarily
+regil people with you know an academic
+treatment here but like you saw kind of
+like the Before Time and then over the
+past five years things have started to
+really change and just like anything in
+the world you know you have like a kind
+of a slow uh interum era and then and
+then things start to speed up and then
+you get this accelerating rate of change
+right and I feel like that is happening
+in open source at least as an outsider
+but you all are insiders you all are
+actually like interviewing these people
+and talking about it and Jared is doing
+his weekly Chang log News segment where
+he basically just has the top stories on
+open source each week um what are some
+other big changes that you&#39;ve
+experienced I I&#39;m pausing to let Adam
+hop in
+first I would just
+say I think open
+source I think we should touch on how it
+grew a little bit just because it&#39;s it&#39;s
+kind of fascinating in my opinion like
+it GitHub was born at the perfect time
+it was the the results
+of a need I&#39;m a word sound with this for
+a
+second sorry that&#39;s just a too many
+political jokes here OMG my bad and this
+is unedited I forgot yeah man you&#39;re off
+your game I totally forgot about that
+uh it it came about in a time when like
+the web was blossoming like there was so
+much happening around the web movement
+and there was so much need rails was
+blossoming rails have been out for many
+years but there was a lot of things just
+happening at the right time and I really
+feel
+like GitHub really helped a lot but then
+like podcast like ours and covering the
+the direction of Open Source and like
+just this inertia around open source was
+really moving fast and people just had
+to keep
+up it was an interesting time really um
+what has changed I would say in the last
+five
+years since we talked what has changed
+Jared I&#39;d seen more licensing Wars more
+rug poles yeah I feel like like you had
+said before you opened it up quite well
+a lot of a lot of turbulence against the
+what the definition of Open Source truly
+is and a lot of people who care deeply
+about holding that to its you know its
+original Hallmark versus allowing it to
+become blurred or a blurred line or mean
+something different and I think we&#39;ll
+keep fighting that fight but it&#39;s just
+that&#39;s been I think the main the main
+challenge in keeping communities
+connected and not there&#39;s not been many
+Forks a couple Forks
+mostly As a result of the rug pole like
+terraform that was a rug pole and then
+tofu was the result the fork result of
+the Rog Pole right and when we say Rog
+pole we&#39;re speaking of a change in
+license after a long period of time away
+from an open source license yeah which
+has been enacted by a handful of large
+organizations that have grown up around
+or alongside their open source projects
+such as hashy corporate terraform such
+as elastic with elastic search which by
+the way that this is a rug push because
+they&#39;ve actually gone back to open
+source so reverse man a unique one they
+were one of the early rug Poes but they
+pushing it right back where it was so
+that&#39;s what we mean by rug pole is a
+relicense changing the terms out from
+under your community yeah so let&#39;s talk
+about the implications of that because
+for a lot of people oh okay so some like
+legal e in uh you know a a markdown file
+changed who cares what&#39;s the big deal
+like but that means so much
+let&#39;s let&#39;s say uh and and this is my
+own crude understanding of how it works
+but let&#39;s say that Freo Camp is a big
+fan of a project and and I have a few
+staff and I&#39;m like hey like we&#39;re make
+we love this project but it&#39;s not quite
+what we need we&#39;re going to make some
+changes and improvements and we&#39;re going
+to contribute those back and then uh you
+can share those uh changes with
+everybody else and like the new features
+and stuff and then uh so let&#39;s say we&#39;re
+using that we&#39;re doing that and like a
+whole bunch of other organizations are
+doing the same thing they&#39;re they&#39;re
+taking this project and they&#39;re they&#39;re
+helping expand it maintain it maybe even
+paying people to work on it because
+they&#39;re so dependent on it and then
+suddenly the license changes and they&#39;re
+no longer able to use uh all the work
+that they&#39;ve done or they&#39;re no longer
+able to modify like they&#39;re stuck on
+some old version that&#39;s no longer secure
+and no longer supported and it just gets
+really messy for all the people along
+the way unless of course those
+organizations turn around and start
+paying to license the latest versions um
+right yeah so basically if you own a
+project you can kind of like rug pull uh
+in the sense that you can like change
+the terms uh of the argument of pray I
+do not change them again change them
+again Vader move
+right you know and and like what can
+people do they&#39;re like so dependent on
+this thing uh that you&#39;ve built that
+they have they have to look in the
+mirror and say okay are we just going to
+basically pay the ransom essentially are
+we going to start paying for something
+that we thought was going to be free and
+that&#39;s why we even hitched our wagon to
+this train right because when you&#39;re
+looking well the reason open source is
+winning the reason everybody&#39;s going
+open source is one of the big reasons
+there are many reasons but one of them
+in my mind has always been like okay we
+can count on this not suddenly becoming
+like some exploding is like a line item
+on our uh you know uh expenses because
+it&#39;s open source we can just continue to
+use it it&#39;s dependability we&#39;ve made
+this decision now we can move on and
+make the thousands of other decisions we
+have to make as an organization
+dependability right exactly if they
+change the terms then suddenly you have
+to go all the way back and unwind
+everything you&#39;ve done becomes this big
+ordeal right and it it scares people
+like I would be really scared if we were
+heavily you know in the kubernetes
+ecosystem which I think we do use
+kubernetes for a few things but it&#39;s not
+like you know it&#39;s like a few people on
+our team use kubernetes it&#39;s not like
+like we have entire departments that are
+you know dependent on this uh but I can
+imagine imagine if you&#39;re like a big
+tech company or something and you&#39;re
+using it suddenly this is a huge deal
+for you and it might represent you know
+hundreds of thousands millions of
+dollars in licensing fees that are like
+an unexpected sudden ongoing expense as
+a result of this what&#39;s your concern
+with
+kubernetes what you mean with terraform
+terraform I apologize no shade to like
+did I miss this did I miss one did I
+listen to news this week fast enough no
+no I misspoke I I confuse one devops
+tool for another not a devop i use these
+tools they&#39;re interrelated but yeah
+different
+project yeah that&#39;s no that&#39;s well said
+there some of the mechanics of how this
+works I think are informative and
+perhaps interesting so when you license
+a project you pick a license you can
+actually apply multiple licenses to a
+project and then in which case the users
+of that software get to pick which
+license they want to apply but like
+Quincy said like that&#39;s the terms of and
+conditions of using that software right
+and so when you pick an open source
+license there&#39;s a set of licenses cuz
+there&#39;s a billion licenses out there in
+fact you can create a new one right now
+by writing down some terms and putting
+on some software now you have created a
+brand new license you know call it the
+Quincy Larson license you can just
+invent one and yet Winamp license yeah
+exactly and um but that will be
+proprietary it exists you know Quincy
+created it it&#39;s his license he applies
+it to his software and the issue with
+that is anybody who wants to use
+Quincy&#39;s software now they have to
+interpret and follow the terms of that
+license and a lot of times this involves
+a lawyer or sometime in some cases a
+court of law to determine if you&#39;re
+actually compliant there&#39;s a set of
+licenses which are deemed open- Source
+there&#39;s an open source definition you
+can go read about it I think it&#39;s open
+source.org
+um it&#39;s maintained by these this group
+of people I think it&#39;s a nonprofit
+called The Open Source initiative and
+they&#39;ve come to agree on what open
+source means and everybody pretty much
+agrees so far of what open source means
+and then they go and apply that
+definition to all these different
+licenses and there&#39;s a set of bless
+licenses which are officially open-
+Source licenses so when you pick an open
+source license such as the MIT license
+which is a very permissive open source
+license it says pretty much do whatever
+you want with this just there&#39;s no
+warranty like and then there&#39;s like
+usually a clause in there about keeping
+this license in the copies of the you
+know perpetuating the license itself
+something like that yeah and like free C
+Camp we use BSD 3 so it&#39;s like MIT which
+is basically the most permissive but we
+also say you can&#39;t pretend your free Cod
+Camp because you can imagine like all
+these different shops propping up and
+pretending they&#39;re free Cod camp and
+like charging parents for coding
+educationally kids or something yeah so
+there&#39;s a set of licenses that a lot of
+them are very similar like it&#39;s nuanced
+differences and when you apply that to a
+piece of code such as the freec code
+Camp platform and you put that out there
+on GitHub or or anywhere on the internet
+and say this is open source okay you
+that license applies to that
+code going backwards and forwards until
+it gets changed and the moment that that
+license changes if Quincy decides to go
+wahaha and change it right into
+something proprietary he can&#39;t actually
+go back in time and apply the
+proprietary license backwards because it
+was already previously open source
+licensed and so you&#39;re pulling the rug
+from the future but not from the present
+this is why Forks exist right because at
+the day that Hashi Corp decided
+terraform was not open source anymore
+well terraform was still open source
+that day and so starting from that exact
+point in time a fork of terraform as it
+was the day it was still open source not
+the future since then that&#39;s a different
+piece of a different license that can
+then be taken and because it&#39;s an open
+source license it can be modified and do
+all these things and it can be used
+commercially and so that&#39;s why when
+somebody changes the license over time
+they can&#39;t go back in time and change it
+previously that&#39;s why Forks exist and
+that&#39;s why they can exist if you can go
+back and change it historically they&#39;d
+be real messy but that&#39;s kind of how
+that&#39;s the the mechanics of how that
+license applies and why when a rug gets
+pulled a bunch of people are like well
+we&#39;ll just take this rug over here
+rename it we can&#39;t use your trademarks
+but we sure as heck can use your source
+code up until that day and then from
+there they fork and they have different
+histories yeah rug PS and you said red
+rug push is where you like pull the rug
+you&#39;re like wait a second the backlash
+was too
+s well so elastic search was one of the
+early ones mhm um and one of the things
+that has changed has the public clouds
+have really entered the market and so
+the biggest one being AWS of course
+there&#39;s
+Azure gcp Google Cloud um and what AWS
+has done which is completely inside the
+terms of the legalities of Open Source
+software is they&#39;ve taken open source
+projects projects such as elastic search
+which is an open source piece of
+software and they&#39;ve offered it as a
+hosted
+service without contributing back and so
+you have this entity elastic which is an
+incorporated business entity which is
+making money hosting elastic search
+which is an open source
+project and Amazon AWS comes and starts
+to do the exact same thing now they&#39;re
+competing in the marketplace except for
+elastic the company is investing in the
+open source and Amazon is not and so
+completely legal but as you said earlier
+Quincy not chill is that the way you
+said it it&#39;s not a chill thing to do
+right right and so there there here in
+lies that angst right that that friction
+again of like we give this this gift to
+the world we&#39;re building a business
+around it now a competitor comes in
+offers the exact same thing we offer
+probably better because they&#39;re AWS
+they&#39;re really good at this kind of
+stuff and they don&#39;t have to spend all
+these resources on the software because
+we&#39;re working on the software and so
+they&#39;re kind of freeloading that&#39;s the
+perspective of elastic so they were one
+of the early mongod DB was a an epe one
+as well they were one of the early Rel
+licensers and back in 21 they relicensed
+to a proprietary
+license uh was it sspl M they used that
+proprietary license and elastic search
+was no longer open source from
+there yeah and that fast forward too
+recently they relicensed again because
+things have changed alv2 baby and now
+they are open source once again so
+they&#39;ve that&#39;s why I called a rug push
+because they&#39;re kind of putting the rug
+back where it was yeah we just we just
+spoke to sha banon is it out there yet
+Adam that episode will be out there by
+the time this goes out it&#39;ll be out
+there Shay bannon&#39;s the CTO of elastic
+and we just had him on the show talking
+about all the details of why they did it
+why it was blah blah blah blah so we&#39;re
+steeped in that particular instance but
+it&#39;s it&#39;s the first time we&#39;ve seen
+somebody go back after I think in their
+case it was three years of a proprietary
+license now they&#39;re back to open source
+awesome years and uh if that episode
+comes out before this episode does I&#39;m
+going to add that I&#39;m going to link to
+it in the show notes yeah it&#39;s a good
+one it&#39;s worth listening to I think it
+it shows the Hacker&#39;s Journey it shows
+um it shows the the challenge that they
+went through things they couldn&#39;t really
+fully I think they did share it publicly
+well but articulated very well was was
+the challenge the main challenge I&#39;ll
+paraphrase not the whole conversation
+but the gist of the the Crux of the
+issue was around trademark and to defend
+trademark they changed the open source
+license so that it was just undesirable
+to use their software anymore they they
+would had to have forked it and I think
+that Force name changes and just cause
+some disruption and so it was really
+around trademark and a misuse of the
+trademark and an unwillingness to change
+the misuse of this trademark and so as a
+protection mechanism they change the
+license you know from the outside it&#39;s
+easy to see that as a rug pole but now
+in retrospect you still you still see as
+a rug pole but you understand more
+deeply why this is why I think backstory
+is so important when you have any sort
+of villain up out there because behind
+every villain is a backstory just
+waiting for you to somehow root for them
+a little bit or at least have some
+empathy for understanding why at least
+they&#39;re the villain or perceptually the
+villain to some people and I think it
+was easy to see because this rug pool
+scenario had become more and more
+pervasive at least it was the it seemed
+like the beginning of it I think Monga
+was first with it really um and then
+elastic both using the sspl
+and it was just easy to see it as a rug
+pool but now in retrospect I think after
+that conversation I have a not so much a
+change of opinion that was a rug pool
+but I at least have some empathy and
+some sympathy for why the choice was
+made and I&#39;m happy that a hacker was at
+the hel and was cheerful the moment that
+they could take their code their company
+and the code the company creates back to
+being open source I think it&#39;s so cool
+awesome yeah that sounds like a really
+cool uh tale from open source it&#39;s worth
+listening to and and don&#39;t let my
+paraphrase th you let that be a
+teaser awesome I&#39;m I&#39;m stoked to listen
+to it I like trailers I like teasers jar
+by the way I will I will I will watch a
+teaser this is a side note since I
+mention the word teaser I don&#39;t like
+movie trailers I don&#39;t watch movie
+trailers but I will watch a teaser the
+teaser is like the 30 second like just
+like voice over not even a full scene
+just to be like oh my gosh that looks
+beautiful that looks so amazing I would
+watch that for sure trailers ruin movies
+man and so movie trailers like certainly
+back in the &#39; 80s like you go watch if
+you want to watch some movie from the
+1980s just go watch the trailer they the
+entire story line they show you the end
+and I watched The Back to the Future 2
+trailer while we were waiting for my
+kids were making popcorn and like let&#39;s
+just watch the trailer real quick and
+I&#39;m like it&#39;s literally a plot like a
+plot point for plot Point summary of the
+entire movie in like 3 minutes it&#39;s like
+don&#39;t even go watch the movie unless you
+to although maybe that&#39;s a hack you know
+nowadays I have less time to watch
+movies just go trailer only I mean it&#39;s
+a piece of art itself I think I would
+give you even one more there is a show
+on the internet called pitch meeting do
+you know this Quincy pitch meeting oh I
+do I&#39;ve heard this satire though isn&#39;t
+it Ryan George is the fella he was
+from uh Screen Rant yeah Screen Rant it
+originated on the Screen Rant Channel
+became so popular they had the they had
+to sub show that thing Jared for a while
+it was the sub show and they were like
+no no no you&#39;re a full on First Class
+citizen you&#39;re your own show so now you
+have
+um uh gosh I just got lost my brain with
+what it was called pit pitch meting pit
+meting pitch meeting pitch meetings are
+amazing because so Beetle Juice Beetle
+Juice jar you g to go watch that no okay
+so I felt the same way I&#39;m like Quin you
+going to watch that one uh no I really
+wanted to though so go ahead and SPO
+they&#39;re going to have a third one
+obviously because you have to say Beetle
+Juice three times I don&#39;t know man I
+don&#39;t I think after this one I think
+it&#39;s not going to happen I don&#39;t think
+it&#39;s going to happen no
+so if I don&#39;t think if I&#39;ve watched the
+movie I&#39;ll watch peit meetings because
+they&#39;re hilarious if I don&#39;t think I&#39;ll
+ever watch it but I wanted to watch it
+I&#39;ll watch the Pitch meeting and if I&#39;ve
+never if I don&#39;t care about the movie I
+just won&#39;t watch it but pitch meetings
+to me is it&#39;s pure comedy it&#39;s all
+satire it makes fun of the script
+writing process the script writer
+pitches is the idea of the of the movie
+to the producer so it&#39;s script writer
+producer and the producer always just
+wants to make a bunch of money all they
+care about is Nostalgia bringing back
+Nostalgia or whatever it can do to like
+sell trinkets oh we can make some things
+out of that kind of thing and there&#39;s a
+lot of just really cool on liners but
+the pitch meeting for Beetle Juice
+Beetle Juice will if you don&#39;t care
+about watching that movie and you like
+the original be just go watch the Pitch
+meeting like the best spoiler ever it&#39;s
+satisfying enough that you get the movie
+and what it could have delivered and now
+you know exactly why you shouldn&#39;t have
+watched it if you did watch it there you
+go it&#39;s worth watching awesome well I
+I&#39;ll take a look at that aside from
+these big changes in the way that
+organizations especially large
+corporations approach open source what
+are some other
+big changes that you think might might
+not just be like aberration or like
+learning processes but may actually be
+like permanent changes to how software
+gets made
+permanent changes to how software gets
+made well it&#39;s more collaborative than
+ever I think that we&#39;ve really greased
+the skids on the collaboration process I
+think that everybody now pretty much
+unless they happen to be that one
+unicorn like needs to be able to work in
+a team work with a team you know we can
+do more together than alone and the
+tools for that have gotten really good
+now they&#39;re still too hard I was just
+ranting about this on chain log news
+last week like I read my umth git guide
+uh the other day I linked to it because
+you can&#39;t have enough git guides right
+Quincy so I&#39;m sure you guys have an
+entire I&#39;m sure you have a whole
+curriculum around git yeah it&#39;s too hard
+there&#39;s too much this this this guide
+which is really well written and I
+linked up T I talked about it was all
+about how to maintain a downstream Fork
+of an upstream dependency and this would
+be a dependency that you may have some
+contributions to it&#39;s not going to be a
+minor thing it&#39;s like a major dependency
+like rails for instance you know a
+framework and I&#39;m reading through it I&#39;m
+nodding my head I&#39;m in agreement with
+lots of things and I&#39;m like this is a
+lot of stuff that has nothing to do with
+what I actually want to be doing which
+is pushing my project forward right like
+this is just
+maintenance of a of how to have Atomic
+commits and how to rebase when to
+rebase you know interactive versus this
+or that use the gooey like there&#39;s just
+all this
+stuff and I&#39;m like someone need just
+fixed this problem don&#39;t they like where
+is the
+next iteration of collaboration tools
+I&#39;m pining for it it&#39;s gotten a lot
+better but I think it can still get a
+lot better from here and we might be
+looking back on these days as like the
+batt old days of collaboration when we
+had to think about so much
+minutia maybe the LMS will just do the
+minutia for us but something needs to
+something needs to give here like we
+should be able to take your guys&#39;s G
+curriculum and just throw it in the
+trash bin of history at some point I
+think I mean I I like to think that like
+we should always be able to look back at
+any given moment and think those were
+the bad old days and the things
+significantly improved and I definitely
+think it&#39;s gotten easier like GitHub has
+been pretty active about rolling out new
+tools and if you don&#39;t like how GitHub
+is doing it you you can use gitlab or
+some other tool and just use that with
+your team uh I do think git is like a
+massive Improvement upon the old stuff
+but but git is tricky enough that you
+and I are constantly having to pull up
+references and some of the most popular
+articles on free Cod Camp are related to
+get and come and git operations and
+trying to understand how get Works uh so
+the actual I guess instruments of Open
+Source themselves uh are improving but
+they&#39;re they&#39;re not improving fast
+enough and there&#39;s still so much room
+for improv and maybe completely new
+paradigms of like how Version Control
+and collaboration are approached yeah
+you almost need somebody who&#39;s not
+steeped in it to come in and be like
+let&#39;s look at it at a 90° angle that
+nobody else is doing and let&#39;s let&#39;s
+approach Version Control from this
+direction and that just like you said is
+a new paradigm that fixes a whole lot of
+the stuff that we currently is status
+quo wo and it&#39;s like well that&#39;s just
+the how we do it because that&#39;s how we
+do it maybe Merkel trees are the problem
+I don&#39;t know like you get down into the
+details and we&#39;ve talk with people who
+are either trying to reinvent git or
+just improve gits tooling like the
+editors and the Integrations and stuff
+and they think git will be the next git
+because of
+its solid foundation as a technology I
+don&#39;t know how it&#39;s going to shake out I
+just know there&#39;s tons of value to be
+brought and to be made by somebody who
+can come and get us to like the next
+plateau of source code collaboration and
+then of course the other thing that&#39;s
+really happened is changing like we&#39;re
+in the middle of it right now is really
+a Dev tools Renaissance I mean the
+introduction of llms into our Dev tools
+is still really
+early and I don&#39;t think they&#39;ve brought
+yet the value that you know the Twitter
+Bros want you to believe they have with
+their demos yeah but
+we&#39;re at the beginning stages of it and
+as we figure this out and integrate it
+more I think cursor is a good example I
+think some of the stuff Zed is doing is
+very interesting like into the
+editor it&#39;s going to change massively
+over the next three or four years I
+think how we&#39;re day-to-day writing code
+once we figure out how to use these llms
+for what they&#39;re good at and to ignore
+the stuff they&#39;re not so good at yeah so
+I mean you you kind of alluded to the
+hype around these tools yeah but uh you
+use these tools a lot I think most
+developers I know that are trying to
+stay with the state-of-the-art have
+figured out ways to incorporate them
+into the workflows and started
+experimenting with uh what works finding
+things that don&#39;t work very well and
+just going back to Old practices that do
+work but but experimenting that&#39;s that&#39;s
+what we do is devs we&#39;re constantly
+tweaking and trying to squeeze a little
+bit more performance out of our tool
+chain we haven&#39;t really talked about the
+change log as an organization and I want
+to talk about that because it is you
+know a company like it&#39;s the source of
+sustenance for you all you probably have
+some contractors working with you of
+course you&#39;ve got the break master
+cylinder creating these amazing beats
+and there was a Rec episode where
+interviewed them awesome Episode by the
+way thank you
+um what are you all doing and how are
+you incorporating tools and like maybe
+we can talk about how the change log
+Works under the hood
+okay take it simple right isn&#39;t it
+pretty simple pretty easy you know we
+record conversations and then we put
+them out there
+yeah it it uh it kind of is that simple
+but it&#39;s kind of not that simple I think
+we&#39;ve gotten to the place of Simplicity
+over years of T tiny and sometimes
+larger iterations to get
+to uh the version that works the best or
+the best for us and I think the
+organization operates Ates from a it
+stems from how Jared and I want to live
+our lives we optimize for our families
+we optimize for our personal time our
+enjoyment of life our ability to have
+hobbies our ability to show up for our
+kids and our family and I think if we
+were trying to like build the most
+bohemuth Media company that just
+conquered all of podcasting then we
+would operate differently so I think
+that might be why our answer is or at
+least my version of the answer is
+somewhat boring I think we just really
+just care about software
+we&#39;re software developers at our heart
+and we show up every single day caring
+about this world and we&#39;ve been in the
+trenches so long that we have enough
+history to recall 2009 what happened or
+2010 and what happened like some people
+can&#39;t because they just weren&#39;t involved
+in software
+then and I think that we just show up
+record shows with people uh pay
+attention to where things are moving we
+have a thriving zulip Community now not
+a slack Community I think really has
+become the unexpected like heartbeat of
+what I think we should be around zulip
+has been really cool as a technology but
+then also as a community it&#39;s let us
+have so I think we just really pay
+attention to the people we our our
+truest fans I suppose the ones that show
+up and interact with us we show up and
+we deliver shows that appease them and
+Delight them and bring them Joy they
+give us feedback about what they like we
+work with cool people like break master
+cylinder
+we&#39;ve got awesome people who work with
+us amazing editors uh Jason and Brian
+are amazing people to work with I don&#39;t
+get to work with them personally because
+I&#39;m not located with them but I get to
+work with them by proxy through the ways
+we work together but it&#39;s really awesome
+I think we have a pretty well greased
+well oiled machine that works pretty
+well and doesn&#39;t really tax us
+dramatically unless we leave town like
+we&#39;re about to jar which hey next week
+somehow we got to keep shipping shows
+and not being in our at home seats and
+you know that&#39;s all always like uh it&#39;s
+always a little pressure when we when we
+take off out of town but I think I say I
+think our version is pretty pretty
+boring on how we produce our stuff but
+from the outside I can imagine that was
+pretty cool why you share that Jared is
+there is there more that we should share
+on how we actually well i&#39; be interested
+in what Quincy&#39;s interested in
+specifically like we can get into
+specifics of different aspects workflows
+how do you uh so you have this massive
+Spotlight that you can shine on open
+source projects right and and devs
+working in the open source space
+what is your process for determining
+whom to interview and who to have on the
+show and and when you create new shows
+and you find new hosts because one thing
+that is wor notable about the change log
+is this like an entire ecosystem of like
+I think like six different podcasts at
+least six um and and you have a lot of
+uh Legacy podcasts that are still like
+the RSS feeds are still live even if
+people aren&#39;t contributing uh like
+request for commits is one I
+particularly enjoyed as an open source
+maintainer myself so um you know like
+like what is the decision-making process
+uh for deciding what to do with your
+show and with this community that you
+built
+right so you&#39;re going to get fuzzy
+answers on this kind of stuff because
+like how do you make decisions is really
+the question let&#39;s talk let&#39;s start with
+content um well we are a listener first
+and so we think about what our listener
+would be interested
+in um and sometimes that comes directly
+from our requests so we&#39;ve fulfilled
+probably hundreds of listener requests
+over the years where we literally do a
+show because somebody asked us to now
+we&#39;re not going to do that on a show
+that we don&#39;t think is a good idea just
+because they asked us because there&#39;s
+lots of requests that just don&#39;t get
+fulfilled we do read them all and so
+that always feels good because as I joke
+I jokingly say at least we know one
+person enjoyed this episode right it&#39;s
+the person who requested it so we&#39;re
+always been listener first and then we
+are also our own audience and
+so if Adam is excited about a person or
+a technology or a topic like that&#39;s good
+enough for me and if I&#39;m excited about
+it that&#39;s good enough for him and so our
+own personal interest draw us into areas
+like we&#39;ve been doing way more shows on
+H lab stuff because Adam&#39;s gotten into
+HB stuff and running servers in his
+house and you know procs Mox and Plex
+and like all this stuff that isn&#39;t my
+bag of tricks but it&#39;s become his and so
+cool let&#39;s talk about it super
+interesting just as an as a for instance
+silon
+Valley this is a this is a touchy
+subject Silicon Valley uh does show up
+every once in a while the TV show in our
+audio the TV show for some reason Adam
+just can&#39;t get over this TV show and he
+has to bring it up all the time that&#39;s
+the whole story yeah and uh for anybody
+who hasn&#39;t watched the classic the the
+modern classic contemporary classic yeah
+uh Tv show uh Mike Judge creator of
+office space y creator of Idiocracy
+which is very controversial movie but
+you&#39;re just St the deck man Terry Cruz
+as president Mountain Dew oh yeah I
+can&#39;t remember his full name but
+Mountain Dew he was like paid to have
+that in his name phenomenal movie uh you
+know it&#39;s a lot of people would probably
+uh yeah uh they didn&#39;t even distribute
+it it was too controversial it was too
+wild out there but but uh Mike Judge uh
+created Silicon Valley and it&#39;s a great
+show very meable show lots of a great
+show don&#39;t give you wound up get wound
+up you&#39;re giving him you&#39;re fueling the
+Flames here the thing is that so many of
+the jokes there and it was so well
+executed um even in its technicalities
+of the way the valley works and it&#39;s
+just it HS so close to home for so many
+people that we talk to that Adam brings
+it up all the time and I enjoyed the
+show I watched the first season I kind
+of fell off in season two but Adam has
+probably seen all six seasons multiple
+times multiple multip and so he gives
+these deep cut references that nobody
+understands and the show kind of grinds
+into a halt and then we we throw a ding
+in there we&#39;ll actually have a ding in
+our audio every time Silicon Valley
+comes up because my wife and I watch the
+whole whole series um and it&#39;s not every
+show but it&#39;s frequent frequent enough
+to have a ding yeah yes let let me give
+you a good question to ask us since we
+talked about these since Jared mentioned
+listener requests and let&#39;s see if I
+think Jared and I might have the same
+response as the to the answer okay or to
+Sam answer to this uh to this question
+ask us of The Listener requests of The
+Listener requested episodes which were
+your favorite so we did fulfill and we
+have fulfilled listener requests so they
+will literally write in we you can go to
+change.com request and you request any
+episode for any podcast uh you plug in a
+few details and dynamite and it lands in
+the podcast inbox it&#39;s pretty easy to
+triage Etc and so from that we&#39;ll select
+episodes we&#39;ll actually reach out to
+people we don&#39;t know we&#39;ll produce a
+show that has some interest by us
+because we have to have some interest or
+at least be interested but it really the
+idea for the episode and the person or
+the thought was born by an external
+somebody who listened a listener all
+right so the question Quincy you can ask
+us is of The Listener requested episodes
+you&#39;ve gone ahead and produced which
+were your favorites or which was your
+absolute favorite I wish we have the
+same one
+well Adam and Jered of The Listener
+produced podcasts you all have produced
+which ones were your favorite that&#39;s a
+very good question I&#39;m glad that Adam
+thought of it I&#39;m assuming since you
+thought of this question Adam you
+immediately have an answer teed up for
+it I think you know I think you know the
+one all well then tell me what it is we
+were so I will I will just I will just
+uh hint at what I think you should be
+thinking okay and once I give you these
+details you will concur okay uh we were
+pleasantly
+surprised by the person they gave so
+much wisdom we were unexpectedly happy
+with the show we didn&#39;t plan to talk to
+them this was given to obviously you
+know how listener requests work so
+understand the full circumference of
+that and once we were done with that
+episode we haven&#39;t talked to him since
+it&#39;s a it&#39;s a one time thing we haven&#39;t
+talked to him we&#39;ve talked about having
+I&#39;ll say the gender him back on okay uh
+and it was an excellent show that&#39;s
+that&#39;s it I&#39;ll just share that and what
+year was
+it recent okay in the last couple years
+it wasn&#39;t five years
+ago so this would be like a figure that
+is somewhat polarizing yeah I mean I I
+I&#39;m I don&#39;t know the answer to this me
+tell the answer then and when I tell you
+you&#39;re going to be like yes I agree I&#39;m
+frantically scanning our list of
+episodes trying to find I&#39;m try to guess
+who this might be yeah okay who is this
+person this mystery guest I&#39;ll tell you
+the tale of the show okay attack of the
+canaries okay attack of the canaries yes
+harun Mir from thst yes yes that was a
+great
+episode best best ever request probably
+my favorite requested episode I love it
+that&#39;s a great episode that goes back to
+probably two years ago we haven&#39;t had it
+back very interesting because the things
+deploys these canaries they&#39;re basically
+honey pots they sell Hardware honey
+Poots into organizations all around the
+world they have a very cool business
+model and a perspective on business
+which I really appreciate from Maron and
+just they sweat the details of the
+software it was it was a good episode
+and a Honeypot is where you have like
+intentionally kind of set a trap yeah
+exactly for someone where that like oh
+I&#39;m so clever I discovered this
+vulnerability but no you just stumbled
+into the honey pot and now we know that
+you&#39;re here yeah yeah exactly what why
+the products called Canary because the
+entire point is not to secure your
+network but to know when somebody&#39;s on
+your network and so these things act
+like a Windows box or a Linux box or
+whatever you could have it be a Nas you
+can they have all these different
+profiles that you can set up in your
+network network attached storage sorry I
+like to Define every acronym people say
+okay thank you um and then when a hacker
+inevitably stumbles upon one because
+when somebody hacks into a network
+they&#39;re basically operating blind they
+can&#39;t they don&#39;t know all the machines
+on that Network so they start to just
+like feel around and they&#39;re they&#39;re
+gonna run a network scan and see which
+devices have ports open and they&#39;re
+gonna Maybe tell net into a port and
+these canaries as soon as you tell net
+into this port on a canary which looks
+like an engine X which is a web server
+uh machine it actually phones home and
+says hey someone&#39;s on your network and
+so it&#39;s a really cool idea and a good
+execution on that idea and we talked to
+herun Mir from think all about that and
+uh we never would have had it not been
+for one of our listeners who knew about
+it so that is a good example Adam I
+didn&#39;t know that was your favorite
+favorite but I respect it you respect it
+is it now your favorite
+favorite I just wasn&#39;t going back that
+far in my head I was thinking we had a
+really good
+conversation about building ergonomic
+keyboards oh yeah uh with Ariz Zuckerman
+recently from
+Zsa who builds those Quincy these are
+the keyboards that like split in half
+yeah and they&#39;re mechanical and they&#39;re
+ergonomic and they sell them and stuff
+and that was the one that was a
+listening request in my it was in my
+mind as one recently that I enjoyed and
+I would not have sought out myself but
+when you do all these shows it&#39;s hard to
+keep track of your babies you know
+that&#39;s true I&#39;ll tell you one show that
+I listened to I think it was like last
+summer I was walking around New York
+City and I was just like I went you know
+I love walking and it&#39;s a great excuse
+to listen to lengthy podcasts like this
+one and like yours and uh I I was just
+walking around New York City I was
+staying there uh with the founder of uh
+uh he founded thinkful
+and uh like a whole bunch of different
+like developer boot camps and stuff
+super chill dude uh Daryl he gave us
+like $150,000 that we put toward
+developing our data science curriculum
+which as I mentioned in the other
+interview where you all interviewed me I
+recall that now yeah so I was just
+saying sorry for all the background
+information but I was just walking
+through the streets and I I had to get
+all the way like I love walking around
+New York City it&#39;s such a walkable City
+and I had to get completely across
+Manhattan basically from like North all
+the way to South and I was like great
+I&#39;m going to put on the change log Steve
+Yi that interview was so amazing I
+learned so much from that so he&#39;s a
+great Storyteller this not only is he a
+great Storyteller but he&#39;s like an
+engineer engineer and uh I love
+listening to kind of like the old guard
+like who&#39;ve been there and gone through
+like tons of different Revol you know
+Revolutions in technology and he&#39;s
+talking about you know llms and and uh
+after he&#39;s talked about search
+technology he&#39;s worked at like every Big
+tech company so that was just phenomenal
+episode and I think that&#39;s one of my
+favorite interviews in recent memory was
+that episode oh that&#39;s a great one I&#39;m
+glad you appreciated that yeah he was
+there at the beginning of a lot of
+things like he saw AWS as a demo running
+on an engineer&#39;s laptop like before it
+was what it was I think it was S3 in
+particular but like to be there when
+these things that are kind of the
+Bedrock of modern software I you look at
+AWS it really is like the compute for so
+many
+things and to be there when that started
+and to be able to tell stories from
+inside that because you kind of when
+something predates you you go back to
+Linux right Linux kind of predates us I
+mean when did lonus first announce at 93
+maybe it was early 90s
+&#39;92 and so I was TW I was 10 years old
+and by the time I started playing with
+computers in the early 2000s it was a
+wellestablished technology Linux right
+and by the time I started working
+professionally it&#39;s it was always there
+it was just always there and so you
+don&#39;t think about alternate histories
+where maybe that wasn&#39;t the thing that
+took off or how did it actually
+establish itself so well and you know of
+course there&#39;s The Insider power
+struggles and all the other things that
+might be part of the story as well maybe
+not that you don&#39;t think about when it
+pre-exists you and I think for a lot of
+us AWS pre-exists our software career
+for me it doesn&#39;t but for many people
+that does and it&#39;s just cool hearing
+from people who&#39;ve who were inside you
+know on the team that built that and
+imagined it and started having to argue
+why it&#39;s going to work and all this kind
+of stuff so Steve was definitely epic in
+that regard
+yeah awesome so other listener request
+what&#39;s the wildest listener request that
+you&#39;ve actually acted on oh gosh wildest
+like where you&#39;re like this is not a
+good idea but then you looked into it
+and you&#39;re like let&#39;s do this this is
+not a good
+idea I&#39;m not you&#39;re going to I think the
+premise actually for the attack at the
+canary show was a little bit off center
+wasn&#39;t it wasn&#39;t it like how a South
+African is trying to change or there was
+some sort of like I I can&#39;t recall it
+wasn&#39;t exactly on the money for what the
+show delivered I mean Canary was the
+canaries was in there and think was in
+there and but I think it was a little
+left of center in terms of the
+request but we actually I have to go
+read it I&#39;m scrolling you got me
+scrolling again so I&#39;m going to be
+useless while I scroll here well while
+you&#39;re scrolling uh I do want to talk a
+little bit about uh where things are
+heading cuz like I imagine you all are
+like me you&#39;re you&#39;re not like maybe you
+are super sentimental but you all are
+focused on the future and uh where you
+can go from here and and it seems like
+technology is becoming more Central as
+you said you know the the famous markade
+recent article like software is eating
+the world and now not only is software
+kind of eating the world but open source
+within software has kind of eaten
+software you alluded to that earlier to
+where it&#39;s almost like open source is
+one and it&#39;s it&#39;s over and like if
+you&#39;re building software that&#39;s not open
+source it&#39;s probably for a much smaller
+like customer base or it&#39;s much more
+bespoke or something like that but like
+um you know pretty much every major tech
+company a huge amount amount of their
+stack is just open source tools right to
+the point that I think a lot of
+companies like Oracle that develop like
+proprietary databases and stuff uh that
+you know I don&#39;t know I haven&#39;t followed
+closely whether they are also open
+sourcing stuff now but it feels like the
+momentum is definitely on open source
+side and so you all were very wise and
+preent to focus on open source which
+ultimately went on to become like the
+biggest category of software uh where do
+you see things going and what sorry this
+is like way too big of a question I&#39;ll
+try to scope this
+down what are you excited about over the
+next 5 years considering the the past
+five years and the 10 years before that
+which we covered in the previous episode
+which we&#39;re not even going to talk about
+because it&#39;s a really lengthy interview
+you should absolutely check out but
+we&#39;ve talked kind of about a little bit
+about the last five years what&#39;s the
+next five years look like what&#39;s your
+grand fiveyear
+plan gosh man I think didn&#39;t we just
+talk about whether we be here in five
+years five years ago jar did we just
+talk we&#39;re getting old here Quincy I
+mean I know you&#39;re not I&#39;m older than
+you are I know you&#39;re we&#39;re not going to
+retire you&#39;re not going to retire but
+I&#39;m wondering with Lin came out I was
+like how old were you uh know I&#39;m 1980
+okay so you got two years on me that&#39;s
+not much I&#39;m 82 you and Adam are about
+the same I&#39;m the oldest here then 79 oh
+you okay I didn&#39;t know was you&#39;re were
+old I&#39;m the youngster on This Crew I
+like that
+face yeah literally says kaen which in
+in Chinese characters uh in Japanese I
+realized it it&#39;s uh yeah g Shan in
+Chinese there you go continuously
+improve like continuous Improvement
+yeah so there&#39;s a lot of different
+questions in there is this about where
+we think the industry is going or where
+we&#39;re going to be in five years or what
+do you think like what I want what I&#39;m
+excited about over the next five years
+in software or for for the life of
+there&#39;s a lot of stuff to be excited
+about but how do you think that
+translates into the change log and uh
+the moves you all are going to make as
+an organization
+great question um that&#39;s a really good
+question go ahead Adam I think because
+we&#39;ve been here for 15 years and I think
+every time we think five years ago where
+will we be in five years and we&#39;re still
+here my guess is we&#39;ll still be a
+version of here my hope is that
+we&#39;re not so much more important for
+import sake but impactful because I
+think what we try to do is give the
+hacker generation past present and
+future hacker generation a place to call
+home whether it&#39;s our zulip which is you
+know now super cool which what&#39;s the
+best way to send people to zulip these
+days just change.com Community right
+okay because like it&#39;s been in this this
+flux between slack and zul zulip for
+those who don&#39;t know is an open source
+threaded team chat similar to slack or
+it&#39;s like the cross between realtime
+chat and a forum go ahead and it&#39;s open
+source that&#39;s right cool team behind it
+lots of potential
+um I think for us we just want to keep
+showing up for developers I think as
+long as Jared and I are
+personally uh interested in the
+direction of software and I think if it
+doesn&#39;t personally wear on us which I
+think when you&#39;ve been doing this for a
+while it&#39;s it&#39;s kind of easy to get numb
+I don&#39;t know is that the right word do
+you feel that way too Jared a little bit
+like a little numb to like I don&#39;t want
+to use the word jaded I mean maybe jaded
+I suppose num sounds worse than jaded
+does it really
+accustom to I&#39;m trying to figure out the
+one that&#39;s yeah yeah comfortable yeah
+ACC to maybe much surprise yeah de
+desensitized not desensitized per se but
+like de disenchanted not disenchanted
+disenfranchise no not disenfranchise
+there&#39;s probably a word to describe like
+like uh you just less excited maybe just
+to to dumb it down yeah the colors are
+just a little less bright you still see
+what&#39;s going on and you&#39;re still like I
+see it but but it doesn&#39;t Vibe with you
+the way that it used to right it doesn&#39;t
+feel new anymore it&#39;s it&#39;s just like
+okay well a lot of these things are
+cyclical which you don&#39;t realize when
+it&#39;s your first time through a cycle and
+since all of us have been around for
+many years in the industry we&#39;ve seen
+the Cycles repeat and so yeah it&#39;s
+easier to get excited when you don&#39;t
+realize that you&#39;re at the start of a
+new cycle than it is when you realize
+that you&#39;re at the start of a new cycle
+and maybe one that&#39;s not going to last
+like this is going to come and go it&#39;s
+not going to sustain or maybe this is
+going to sustain but I&#39;ve seen six of
+these it&#39;s a new version of an old idea
+it just becomes less and less
+exciting each time around the cycle
+right and I think that&#39;s where I&#39;m at I
+think as long as we can weather that you
+know ups and downs of the excitement
+storm if that&#39;s even a proper way to
+describe it since we just had some
+freaking crazy storms in this country
+sorry about all y&#39;all uh but I think
+that if we can keep being excited about
+showing up and keep being excited about
+the community that&#39;s that&#39;s being born
+around softare whether it&#39;s the the
+companies the Technologies the people
+that&#39;s what we come for really as the
+people I think we can keep being excited
+individually and then corporately he and
+I and the company itself around the
+people of Open Source and the people
+around software development that I think
+we&#39;ll keep being here and keep doing
+exactly what we&#39;re doing hopefully
+better because iteration baby you know
+and we&#39;re kaisen always improving yeah I
+think our we have been consistently
+making subtle small sometimes big
+improvements consistently over time for
+such a long
+time that we&#39;ve been able to improve and
+we&#39;ve been able to get to different
+plateaus and different levels and
+whatnot I feel like it&#39;s a bit of a
+plateau but I I kind of almost want to
+bring up the maybe potentially our other
+favorite show can I can I steal a
+question here a little bit and not just
+go five years maybe we can answer this
+question but I want to come back to one
+topic let&#39;s do it and I just want to
+point out like one thing before you do
+because like hold that up for just a
+second I don&#39;t want to steal your show
+that&#39;s why I asked I I always like to
+jump in with like little wisdoms that
+I&#39;ve acquired during my you know 43
+years on this planet um a lot of times
+you can feel like you&#39;re in a plateau
+but you&#39;re actually still slowly growing
+like people experience this all the time
+when they&#39;re learning to code like it
+feels like I was actually better before
+and like I&#39;ve somehow gotten worse at
+coding uh you know that&#39;s just the way
+that the human brain works and Adam
+would know this better than most non you
+know neuroscientists and stuff because
+you have run an excellent show in the
+past uh the brain science
+yeah so but but like perception uh is
+wonky and weird it can feel like you&#39;re
+plateauing or like things have suddenly
+slow down and that can just change from
+day to day like side of the bed you woke
+up on right like so I&#39;m glad you said
+that because I think the most important
+thing you can do when you feel like
+you&#39;re platting and I do this to I this
+is my own advice to myself that I give
+to other people as well I suppose
+but is that when you feel like you&#39;re in
+that moment do do as best you can to
+zoom out this is what I learned from
+Marielle my co-host on that show because
+what often happen if you can understand
+focal lengths with a camera if you have
+a 200 mm lens it&#39;s long it&#39;s focus on a
+very long point away it doesn&#39;t have a
+lot of the field of view in it but if
+you zoom out or you take a more wide
+lens approach to it you can see a lot
+more what&#39;s actually happening so I
+think when you&#39;re in those moments have
+a position of gratitude you know be
+thankful for what you&#39;ve been given uh
+you know collect those things like your
+family and your health and the things
+that are you know High bar and high
+quality in your life not just the
+seemingly ho hump plateaued thing and
+really just take stock of what truly is
+happening in your life because you&#39;re
+often on the best moment of your
+life like these are the days
+basically and you don&#39;t even know it you
+you so kind of like that&#39;s kind of why I
+used the word numb earlier I kind of
+feel it that way sometimes you almost
+are numb to the greatness
+because I don&#39;t know you&#39;re just kind of
+you&#39;re just you you&#39;re kind of plateaued
+you&#39;re kind of there but my advice is to
+zoom out get a wider perspective you
+know have some grounding where you&#39;re
+actually at what you&#39;ve actually done
+and what&#39;s what&#39;s actually happening in
+your life who&#39;s there all the good
+things and then look at things for what
+they really are versus like oh man like
+we&#39;re just great and it&#39;s kind of is
+like
+whatever yeah 100% like don&#39;t get numb
+to your own greatness and
+uh don&#39;t lose track of you know how far
+you&#39;ve come and like how far you are
+moving as long as you&#39;re moving in that
+direction 100% like uh and I I love kind
+of like your your analogy of like focal
+length you can change so much like I
+don&#39;t know anything about cameras but I
+know that you can completely change the
+vibe of an image just by changing length
+and things as that yeah okay so you know
+the different lenses you have on there
+right you can just open your camera for
+that I&#39;ve never used any of them I I&#39;ve
+actually got a cheap one I&#39;ve only got
+two lens I got this uh the the SE it&#39;s
+like oh gosh I can&#39;t use an example
+you&#39;re okay I call it the banana phone
+because my kid didn&#39;t really believe
+that I would get a yellow phone but I
+did gotcha yeah just more modern phones
+you can you can hit a neg or sorry a 0.5
+option or a zoom option where it goes
+further in it uses different lenses and
+so obviously as you go further in you
+have less field of view but if you hit
+the0 five or even the further one out if
+you have a a wider lens you see a lot
+more of the availability of the image
+that you can truly see so you see the
+full image imagine seeing only Florida
+geez this is not even edited imagine
+seeing only Austin Texas I use Florida
+like and I just mentioned storms that&#39;s
+not cool it&#39;s like toned deaf sorry
+about that imagine seeing only Austin
+Texas and then being able to zoom out
+and see all of Earth that&#39;s the
+difference right being able to see all
+of Earth you&#39;re like oh gosh I see how
+Europe&#39;s doing I see how uh China&#39;s
+doing I see how different countries are
+doing I see the full picture versus only
+seeing one s single City
+yeah awesome so let me close let me
+close the loop on a previous question
+weirdest listener request I found one I
+found one okay okay great of your call
+and then I can also answer your question
+if you want me to about the future
+things or the exciting things episode
+428 goes goes back to January of 2021
+the episode&#39;s called open source
+civilization open source
+civilization and the
+request
+was to have on
+Marchin jacobowski it&#39;s been three years
+I can&#39;t remember how to say Mar Maran
+Marson uh a Pioneer in the open source
+world with his organization open source
+ecology the request says this his
+knowledge and understanding of how open
+source can benefit job fields such as
+software development can offer a unique
+and New Perspective to the change log
+audience open source ecology has many
+projects running at the time at all
+times but one of the biggest projects is
+called the global village Construction
+Set this is a process designed by osc
+which enables fabrication of the 50
+different industrial machines that it
+takes to build a small sustainable
+civilization with modern Comforts so we
+read that we thought well that&#39;s kind of
+outside of our normal wheelhouse here it
+is open so there&#39;s your tie together and
+we did an awesome episode with March and
+Mar Marson I think he&#39;s French I&#39;m now
+forgetting how to say his first name
+which is embarrassing uh pardon uh the
+pronunciation and I&#39;m not going to
+attempt to pronounce it but uh this
+gentleman who came this gentleman and uh
+fascinating what they&#39;re up to or what
+they were up to so cool it really was
+never that episode dip back into that
+that pool again man yeah cuz they&#39;re
+building the machines that build the
+buildings and it&#39;s open source
+everything and so uh and there&#39;s right
+might even be a commune involved I was
+very uh individualistic and like out
+there in somewhere in Kansas um was it
+Kansas Adam I don&#39;t know it&#39;s three
+years ago now for the details but yeah
+they&#39;re doing cool stuff definitely
+would not have done that episode but
+happy that we did yeah so closing that
+Loop I&#39;ve definitely found like whenever
+you meet somebody who&#39;s like moved from
+like a major city center like you know
+Austin or San Francisco or something out
+to like the middle of nowhere and they
+have like brought with them the funds
+that they built up living in the city
+and everything and now they can do
+whatever they want they&#39;ve got like buy
+a bunch of farmland and just start
+building like these mad scientist things
+those always make for interesting
+stories because people are completely
+untethered to a lot of it cost such a
+fraction to live out in the middle of
+nowhere like that it costed to live in
+the city and suddenly you know resources
+are abundant and you you just don&#39;t have
+to answer to anybody and I feel like
+that&#39;s where where like the old
+equivalent of uh we were given two big
+budget and and and not enough
+accountability and next thing you knew
+we had this weapon of great destruction
+or something like they buil the dreadn
+from like Star Trek or something like
+that right yeah that&#39;s cool farm of
+Missouri Jared it&#39;s Missouri okay not
+Kansas I was close neighboring
+neighboring states yeah open source
+blueprints for civilization so that&#39;s a
+BRI that&#39;s a big picture you know that&#39;s
+a big Vision but also operating very
+much in the small as they&#39;re like kind
+of homesteading and like out there in
+the rurals doing everything cheap and
+with like hand tools and stuff I mean it
+is crazy yeah making their own tools
+yeah making the machines that make the
+things exactly so loud yeah awesome so
+that answers that question and then your
+other question was exciting things years
+yeah you know I I&#39;ll take a technical
+angle at
+this um a trend I&#39;m seeing that I think
+is cool and I think will continue
+speaking of I guess individualism
+is just the the ability and I guess the
+trend and desire to kind of own more of
+your stuff own more of your online
+presence own more of your social media
+own more of your data and to really be
+more self-reliant we&#39;re seeing a lot of
+activity around self-hosting we
+mentioned home Labs earlier there&#39;s a
+huge home lab Community there&#39;s a huge
+self-hosting community that&#39;s
+growing and I think we&#39;ve all been bit
+by various forms of you know data silos
+that we trade uh that we trade our data
+serves Equifax shout out to you all for
+doing such an dat job of breaching
+millions of Americans personal data that
+creepy Advertising based on things that
+you know that based on information that
+big Tech can glean about us from
+wherever we happen to be yeah and then
+sell us something that we can&#39;t even
+explain how they would know that we want
+that thing or that we need that thing so
+we think maybe they&#39;re actually
+listening to us talk like it&#39;s that
+their targeted advertising is so good
+that we just conclude they have to be
+listening to us you know what I&#39;m saying
+yeah like that&#39;s people were convinced
+that the that uh Facebook was you know
+activating the microphone absolutely and
+as we were talking about recently on the
+show for a long time I would explain
+people how how tracking works and how
+Target advertising works and how they&#39;re
+actually connecting not what you said
+but you happen to be connected to this
+person who&#39;s either your spouse or your
+friend or your your sibling and they
+were searching for that thing and then
+they that back to you and like I for a
+long time I was like and finally I just
+gave up I&#39;m like yeah maybe they are
+listening to us I don&#39;t know it&#39;s
+thinking good man um partly tongue and
+cheek but maybe partly not at this point
+because they&#39;re getting really good at
+it so we&#39;re we&#39;re seeing a trend back to
+self-hosting uh some people are leaving
+the cloud um so whether it&#39;s
+organizations for financial reasons um
+or autonomy reasons or it&#39;s individuals
+and their house and their family wanting
+to run maybe they want to run their own
+email that&#39;s really really hard these
+days maybe they want to host their own
+Mastadon server maybe it&#39;s their photos
+you know whatever it is run your
+business off of a Raspberry Pi kind of
+stuff I think that&#39;s a really cool Trend
+I think we&#39;ll see more stuff both in
+open source source and in in uh
+purchasable things to help people do
+that and I just think it&#39;s an appetite
+that&#39;s increasing and I don&#39;t think it&#39;s
+going to decrease anytime soon yeah
+awesome and Adam do you have anything to
+add to that in terms of like things that
+you&#39;re really excited about that you&#39;re
+planning to have a lot more episodes
+about in the future I&#39;m excited about
+people be excited about that uh the
+self-hosting and the
+owning I I guess I feel a little jaded
+to use that to use that word again on
+that front because I feel like there&#39;s
+there&#39;s hardware and there&#39;s software
+and I feel like there just the cost can
+be extreme to own that and the cost to
+lose the data can be Extreme as well and
+so I think it&#39;s like is it&#39;s a small s
+of people type that
+will that can gravitate towards Desiring
+to do that and then successfully doing
+it without losing their data long term
+and like man if you lost your photos of
+like everybody I mean that would be
+absolutely shattering like that like
+there&#39;s just not that Cloud&#39;s any more
+better at it and but at least I don&#39;t
+have to worry about them losing my stuff
+generally and that&#39;s that even happens
+too but wow you know that&#39;s kind of the
+argument from like size equal security I
+mean there&#39;s a lot of people who thought
+working in a large organization was job
+security versus a startup or a small
+business and it&#39;s like reality hits and
+you realize like no it&#39;s not there is no
+such thing as job security and so all
+it&#39;s going to take is like Apple loses
+their photo backups for like 7 million
+people and all of a sudden like that
+whole illusion will just be gone well
+hopefully that&#39;ll never happen yeah we
+hope so catastrophic I mean I often
+think like it would in a lot of cases
+probably take an actual like uh EMP or
+some sort of nuclear bomb being
+detonated over Like Us East one or
+something like that to like actually
+cause a significant amount of the data
+because it is backed up in a lot of
+regions like Freo Camp we&#39;re like pretty
+sharded uh to you know Singapore and
+like all these other places um but yeah
+that that&#39;d be absolutely catastrophic
+let&#39;s say hypothetically this happens
+let&#39;s let&#39;s let&#39;s uh speculate as to
+what the next series of events would be
+ohsh should Apple suddenly lose all your
+baby
+photos class action lawsuits I don&#39;t
+know what happens you know cuz they&#39;re
+gone man they&#39;re gone you&#39;re not getting
+those photos back yeah now if you had
+your own copy at your house because you
+happen to be a backer
+upper right backer you&#39;re a self Hoster
+on your backer uppers then all a sudden
+you&#39;re good to go like you&#39;re the one
+you&#39;re the person who&#39;s not falling into
+a state of depression because honestly
+like for most of us yeah you can rent
+your calendar you can rent
+your
+email but your
+photos like that&#39;s the one isn&#39;t it or
+your videos in the case your media like
+those are your memory that&#39;s your extent
+memory so I will say that I do have I do
+both I actually leverage
+iCloud like any potentially normal
+iPhone user I mean that&#39;s why you use an
+iPhone is you kind of buy the ecosystem
+yeah but then I still also back up my
+own set
+so it&#39;s not a perfect always perfect one
+to one system but it&#39;s better than like
+if I if that did happen I would probably
+still have a recoverable copy
+that I might need to spend days
+recovering in some way shape or form but
+they&#39;re not gone forever and I&#39;m not
+having to search through the terms of
+service to see what my liabilities were
+with
+apple that&#39;s good yeah um I you know I
+just do what a lot of like tech people
+I&#39;ve talked to do which is have a single
+physical copy they store somewhere in
+their house and maybe like a second one
+at their office so that way if your
+house burns down you still got the
+office copy your office burns down you
+still got the house copy uh they both
+burned down at the same time you
+probably still have a cloud copy you
+know but like introducing like I have
+destroyed a lot of data accidentally
+through just my ineptitude as a
+programmer and a database administrator
+over the years and I would not feel
+comfortable if that data was like not
+just dummy data from some project I&#39;m
+working on that I didn&#39;t mean to destroy
+uh if it was actually like consequential
+photos that I&#39;m planning to pass down to
+my kids like my wife you know she grew
+up in China and she went to like college
+there and we met in grad school over
+there
+and like she has like maybe like 10
+photos throughout her entire childhood
+that were preserved through all the
+chaos and stuff going on over there and
+you know it&#39;s heartbreaking and I think
+of like how many hundreds thousands of
+photos I have my kids you know this nice
+timeline within the Apple photos app and
+all this stuff that would be just
+totally catastrophic so so is that your
+main concern about like a lot of this uh
+kind of Back to Basics like DIY stuff as
+far as storing data and stuff like that
+that a lot of people are going to screw
+up and they&#39;re going to accidentally
+have data
+loss I mean I don&#39;t care about that with
+like a home assistant you know like if
+your blinds can&#39;t open I&#39;m not upset
+about that if you screw that up like
+whatever that&#39;s part of the fun but if
+you screw up like your photos that&#39;s a
+big deal to me so I&#39;m you know I still
+keep my own ZFS copies of that so I&#39;ve
+got backups and stuff like that but I&#39;m
+not running my own drive because I&#39;m
+scared that apple will break my privacy
+in some way shape or form so that I can
+run my own home lab version of what is
+iCloud or what photos is on the iPhone
+platform and tunnel through my firewall
+Etc to my network I&#39;m just not I&#39;m not
+that into home lab I&#39;m into like you
+know movies and Plex and py hole and
+other services like hom system for
+example like I have automations on my
+house those are the things I&#39;m trying to
+do
+uh like those are that&#39;s cool to me
+that&#39;s cool stuff like simple home
+automations uh I wish I you know I&#39;ve
+gotten I&#39;ve kind of plateaued J because
+I have less time than I than I can to go
+further than this which it was just a
+really fun Journey like had I not gone
+down this journey into the home lab
+world I would not know or I would I have
+known as much as I do about Linux and
+the various flavors of Linux or why I
+like different flavors or anything
+whatsoever I built the original we can
+mention I&#39;ll mention WordPress and I
+that&#39;s one of my things I want to
+mention hope that doesn&#39;t go too deep
+but uh way way back in the day on a
+digital ocean droplet I we ran the Chang
+log.com not changel log.com but the
+changel log.com the changelog the
+change.com as a
+WordPress um I guess application a word
+instance and it was using I think auntu
+1204
+potentially um and I stood up that box
+thanks to digital ocean tutorials they
+have awesome writers everybody who&#39;s
+ever contributed to their docs and those
+tutorials I ow a Deb of gratitude
+because I learned a lot from that but it
+only taught me enough to get the job
+done it was only when I became you know
+really interested in home labbing and
+this sort of self-hosting things and in
+like learning more about this stuffff
+and be being more steeped in it that I
+truly learn learn like I learned how to
+do it and then I walked away and it that
+thing just ran for years I think it
+probably still be running to this day
+flawlessly it might be infected because
+WordPress um but it would still be
+running as a server a would be going
+strong you know but I learned a lot
+about Linux and a lot about different
+things that I would never have gotten
+the need to do that because I was never
+a system administrator I&#39;m not a backend
+developer generally I&#39;ve never set up
+systems I just have never worked on any
+of the platform type stuff I would ever
+had to before and and now I learn a lot
+more about that so if it weren&#39;t for
+home
+labbing I wouldn&#39;t have learned that but
+I know enough to know how challenging it
+is and how on it you have to be
+consistently to make sure your systems
+run smoothly over time monitoring all
+those things you know so so to some
+extent like this project of trying to
+automate your house served as kind of
+like your indie game like I always joke
+about indie games because like I I feel
+like that&#39;s a big Gateway that a lot of
+people have into learning all kinds of
+stuff about software development is oh I
+need a core gameplay Loop and now I need
+to add you know like some Sprite
+graphics and now I need to add music and
+figure out how the chip tune works and I
+need to figure out you know like how to
+display certain things when certain
+events happen now I&#39;m doing enemy AI
+like it&#39;s a project and just baring on
+that simple project of like you know I
+want to like control my blinds or
+something like that suddenly you&#39;re like
+learning about microcontrollers you&#39;re
+learning about like you know how signals
+are sent and interpreted and um
+auntu uh you know maybe you have like a
+like just some tiny like raspberry piie
+running auntu Ubuntu 12 precise Pangolin
+I had to look up the uh every release
+has a code name but yeah um that that is
+really cool and I I like that kind of
+project oriented nature and I like how
+you bring that into the show and you
+have people talking about home lab and
+things like that right yeah I I think
+that&#39;s a real cool way to run a show uh
+it&#39;s just follow your own personal
+interest because you can trust that if
+you&#39;re interested in it some other
+people are going to likely be interested
+in it if if at least one listener is
+listening like is interested in it and
+requesting it then maybe a lot of other
+people at the very least you have one
+satisfied listener at the end of it
+right and it&#39;s not about Jared being the
+most smartest people ever it&#39;s a
+community like we&#39;ve formed friendships
+because my true passion for Silicon
+Valley or my desire to only ever run ZFS
+as a file system to you know and that&#39;s
+that&#39;s my personal take or different
+things I personally enjoy we have formed
+channels in Zula channels in slack when
+we had slack going
+um and it&#39;s just kind of funny how
+producing this podcast isn&#39;t about
+standing at a Podium speaking at people
+it&#39;s creating a conversation that
+includes people it gives people a place
+to go to cuz like every I would say
+really this is a credit to Jared thanks
+to Jared and his constant hard work of
+compartmentalizing and providing these
+opportunities he works really hard to
+automate when a show is published
+different things that happen on social
+media though I think some of that has
+become more manual these days yeah but
+then even in zulip there&#39;s a new thread
+for every show and so now people can
+jump into that thread and begin to have
+a
+conversation for weeks and weeks
+afterwards like it happened a lot in
+slack but slack was just different in
+the way it it enabled conversations and
+zulip really I think people talk more
+full threaded more full featured more
+full full Fidelity really and
+um what you see there is like you you
+produce this podcast you invite somebody
+on you have this conversation is not to
+speak at the community it&#39;s it&#39;s to open
+the conversation with the community and
+that might turn into another show again
+6 months or a year later and it&#39;s a
+continued conversation those same
+listeners who&#39;ve been listening for the
+last three years know the context of the
+two years ago show or the six month ago
+show or whatever and they&#39;re on the ride
+again like and they even get the request
+another episode like it&#39;s just it&#39;s not
+just Jared to me pontificating it&#39;s it&#39;s
+a community involvement I think that&#39;s
+probably the most joyous thing so you
+got kind of like a change log cinematic
+Universe going and like recurring
+characters and recurring guests man that
+that is amazing Jared you just stumbled
+upon something Quincy that you didn&#39;t
+realize you&#39;re stumbling upon but you
+did gosh we own the domain and Adam has
+been wanting to do something with this
+domain for years is it years now years
+CPU FM Chang podcast Universe CPU FM it
+just never made sense though no but yeah
+there&#39;s your uh catic Universe right
+there the Chang log podcast Universe
+well I I I think after being on the show
+like maybe three or four times I&#39;m a I&#39;m
+a minor character in that
+Universe yeah you got your own little
+side quests going and we&#39;re checking in
+with Quincy yeah let&#39;s see walking
+around in there yeah very cool well
+gentlemen it is an it&#39;s always an
+absolute pleasure to talk and uh we can
+talk all day uh I do want to be mindful
+of the fact that uh Jared has a hard
+stop and I also want to just encourage
+listeners to use the time that I would
+probably continue rambling and asking uh
+you know you know questions following my
+own inquiry and my own interests like go
+and listen to some of those episodes
+I&#39;ve linked at least three of them in
+the show notes the ones that we&#39;ve
+mentioned uh the Steve Yi episode uh and
+uh I think the the Honeypot uh it was
+called um attack of the canaries attack
+of the canaries yeah I I&#39;ve linked that
+as well and and of course if you have
+time and you want to learn more about
+the history of the change log go and
+listen to the episode that we recorded
+you know live in Adam studio in Houston
+uh and you know I think you&#39;re going to
+learn a lot from these people as time
+progresses open source is not going
+anywhere it&#39;s only growing it you know
+has arguably won but that doesn&#39;t mean
+that like it&#39;s not going to be changing
+heavily over the next decade or so and
+uh I love listening to the change loog
+news every week and just getting kind of
+the Straight Dope From Jared getting
+like like just distilled like the most
+interesting thing and in this quirky
+sound bite Rich you know manner that he
+delivers it I love listening to long
+form interviews and the you know just
+the amount of knowledge that is
+available on in in this giant Archive of
+episodes and you know I&#39;m a change log
+Plus+ member for multiple years and I
+encourage other people who are listening
+if you get a lot of out of the show
+consider supporting Jared and and Adam
+and the many uh people that work at the
+change log on different aspects of the
+show in the community and I&#39;m definitely
+going to join the zulip community too I
+not even heard the name zulip in many
+years but we did look at that when we
+were considering and I&#39;m thrilled to
+hear that you&#39;ve had such a fantastic it
+yeah it&#39;s like real time chat meets
+Forum it&#39;s it&#39;s kind of solid it&#39;s uh
+it&#39;s got a lot of possibility I&#39;ll say
+yeah well um everybody I hope you&#39;ve
+learned a lot I hope you&#39;ve gotten a lot
+of insight uh from these two folks and
+uh until next week happy
+coding thanks Quincy

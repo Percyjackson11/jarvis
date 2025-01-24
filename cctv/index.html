@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home CCTV Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            width: 200px;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .sidebar button {
+            background-color: #007bff;
+            border: none;
+            color: white;
+            padding: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        /* Main content styling */
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        #searchBar {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        #cameraForm {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        #cameraForm input[type="text"] {
+            width: 45%;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        #cameraForm button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #cameraGrid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 20px;
+        }
+
+        .camera {
+            background-color: #333;
+            padding: 10px;
+            position: relative;
+            color: white;
+        }
+
+        .camera iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
+        }
+
+        .camera h3 {
+            margin: 0 0 10px;
+        }
+
+        .maximize-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <button>Open Main Door</button>
+        <button>Turn On Fan</button>
+        <button>Turn On Light</button>
+        <button>Close Main Door</button>
+        <button>Turn Off Fan</button>
+        <button>Turn Off Light</button>
+    </div>
+
+    <!-- Main content area -->
+    <div class="main-content">
+        <h1>Home CCTV Dashboard</h1>
+
+        <!-- Search bar -->
+        <input type="text" id="searchBar" placeholder="Search by camera name">
+
+        <!-- Form to add new cameras -->
+        <form id="cameraForm">
+            <input type="text" id="streamName" placeholder="Enter Camera Name" required>
+            <input type="text" id="streamCode" placeholder="Enter Stream Code" required>
+            <button type="submit">Add Camera</button>
+        </form>
+
+        <!-- Grid to display camera feeds -->
+        <div id="cameraGrid"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('cameraForm');
+        const cameraGrid = document.getElementById('cameraGrid');
+        const searchBar = document.getElementById('searchBar');
+
+        // Load cameras from localStorage on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedCameras = JSON.parse(localStorage.getItem('cameras')) || [];
+            savedCameras.forEach(camera => addCameraToGrid(camera.name, camera.code));
+        });
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+const streamName = document.getElementById('streamName').value;
+            const streamCode = document.getElementById('streamCode').value;
+
+            if (streamName && streamCode) {
+                addCameraToGrid(streamName, streamCode);
+                saveCameraToLocalStorage(streamName, streamCode);
+                form.reset(); // Clears the form
+            }
+        });
+
+        // Function to add the camera to the grid
+        function addCameraToGrid(name, code) {
+            const cameraDiv = document.createElement('div');
+            cameraDiv.className = 'camera';
+            cameraDiv.setAttribute('data-name', name.toLowerCase());
+
+            cameraDiv.innerHTML = `
+                <h3>${name}</h3>
+                <iframe src="https://piggy-cctv.netlify.app/#${code}" allow="camera; microphone; display-capture; autoplay"></iframe>
+                <button class="maximize-btn" onclick="openInNewTab('${code}')">Maximize</button>
+            `;
+
+            cameraGrid.appendChild(cameraDiv);
+        }
+
+        // Function to save camera to localStorage
+        function saveCameraToLocalStorage(name, code) {
+            const savedCameras = JSON.parse(localStorage.getItem('cameras')) || [];
+            savedCameras.push({ name, code });
+            localStorage.setItem('cameras', JSON.stringify(savedCameras));
+        }
+
+        // Function to open a stream in a new tab
+        function openInNewTab(code) {
+            const url = `https://piggy-cctv.netlify.app/#${code}`;
+            window.open(url, '_blank');
+        }
+
+        // Search functionality to filter cameras by name
+        searchBar.addEventListener('input', function() {
+            const filter = searchBar.value.toLowerCase();
+            const cameras = document.querySelectorAll('.camera');
+
+            cameras.forEach(camera => {
+                const cameraName = camera.getAttribute('data-name');
+                if (cameraName.includes(filter)) {
+                    camera.style.display = '';
+                } else {
+                    camera.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI PPT Maker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        #slides-container {
+            margin-top: 20px;
+        }
+        .slide {
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+        .slide-editor {
+            margin-top: 10px;
+        }
+        .slide-editor textarea {
+            width: 100%;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>AI PPT Maker</h1>
+    <textarea id="user-input" rows="5" cols="50" placeholder="Enter your presentation topic or main ideas"></textarea>
+    <br>
+    <label for="slide-count">Number of slides:</label>
+    <input type="number" id="slide-count" min="1" value="5">
+    <br>
+    <button onclick="generatePresentation()">Generate Presentation</button>
+    <div id="slides-container"></div>
+
+    <script>
+        const TOGETHER_API_KEY = '8196c182d375ca69022a1f485cae9c587c1b46f245c8d2e62e799d636896a1e4';
+        let conversationHistory = [];
+
+        async function getJarvisResponse(userMessage) {
+            conversationHistory.push({ role: 'user', content: userMessage });
+            const response = await fetch('https://api.together.xyz/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${TOGETHER_API_KEY}`
+                },
+                body: JSON.stringify({
+                    model: 'meta-llama/Llama-3-70b-chat-hf',
+                    messages: conversationHistory
+                })
+            });
+
+            const result = await response.json();
+            const aiResponse = result.choices[0].message.content;
+            conversationHistory.push({ role: 'assistant', content: aiResponse });
+            return aiResponse;
+        }
+
+        async function generatePresentation() {
+            const userInput = document.getElementById('user-input').value;
+            const slideCount = document.getElementById('slide-count').value;
+            const slidesContainer = document.getElementById('slides-container');
+            slidesContainer.innerHTML = '<p>Generating presentation...</p>';
+
+            // Step 1: Create basic structure
+            const structurePrompt = `Based on the following input, create a basic structure for a presentation with ${slideCount} slides. Include a title for each slide and brief bullet points for the content: "${userInput}"`;
+            const structure = await getJarvisResponse(structurePrompt);
+
+            // Step 2: Generate HTML for each slide
+            const slidePrompt = `Create HTML code for ${slideCount} presentation slides based on the following structure. Include tables, charts, or placeholder images where appropriate. Use inline CSS for styling: ${structure}`;
+            const slidesHtml = await getJarvisResponse(slidePrompt);
+
+            // Step 3: Apply universal theme
+            const themePrompt = `Create a CSS style that can be applied to all slides to give them a cohesive and professional look. Include styles for headings, paragraphs, lists, and any other common elements.`;
+            const theme = await getJarvisResponse(themePrompt);
+
+            // Combine theme and slides
+            const finalHtml = `<style>${theme}</style>${slidesHtml}`;
+            slidesContainer.innerHTML = finalHtml;
+
+            // Add edit functionality to each slide
+// Add edit functionality to each slide
+            const slides = slidesContainer.getElementsByClassName('slide');
+            Array.from(slides).forEach((slide, index) => {
+                const editor = document.createElement('div');
+                editor.className = 'slide-editor';
+                editor.innerHTML = `
+                    <textarea placeholder="Enter your changes for this slide"></textarea>
+                    <button onclick="updateSlide(${index})">Update Slide</button>
+                `;
+                slide.appendChild(editor);
+            });
+        }
+
+        async function updateSlide(index) {
+            const slide = document.getElementsByClassName('slide')[index];
+            const editor = slide.getElementsByClassName('slide-editor')[0];
+            const userInput = editor.getElementsByTagName('textarea')[0].value;
+
+            const updatePrompt = `Update the following slide HTML based on these instructions: "${userInput}". Here's the current slide HTML: ${slide.innerHTML}`;
+            const updatedSlideHtml = await getJarvisResponse(updatePrompt);
+
+            slide.innerHTML = updatedSlideHtml;
+            
+            // Re-add the editor
+            const newEditor = document.createElement('div');
+            newEditor.className = 'slide-editor';
+            newEditor.innerHTML = `
+                <textarea placeholder="Enter your changes for this slide"></textarea>
+                <button onclick="updateSlide(${index})">Update Slide</button>
+            `;
+            slide.appendChild(newEditor);
+        }
+    </script>
+</body>
+</html>

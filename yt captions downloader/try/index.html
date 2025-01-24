@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YouTube Video Assistant</title>
+    <style>
+        html, body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .chat-wrapper {
+            width: 90%;
+            height: 90%;
+            margin: 2% auto;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        #chat-messages {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .message {
+            margin-bottom: 15px;
+            clear: both;
+        }
+        .user-message {
+            float: right;
+            background-color: #4a90e2;
+            color: white;
+            border-radius: 20px 20px 0 20px;
+            padding: 10px 15px;
+            max-width: 70%;
+        }
+        .bot-message {
+            float: left;
+            background-color: #f0f0f0;
+            border-radius: 20px 20px 20px 0;
+            padding: 10px 15px;
+            max-width: 70%;
+        }
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #e0e0e0;
+        }
+        #user-input {
+            flex-grow: 1;
+            border: none;
+            padding: 10px;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+        button {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="chat-messages"></div>
+        <input type="text" id="user-input" placeholder="Enter YouTube URL or ask a question about the video...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        let conversationHistory = [];
+        let currentVideoContext = null;
+
+        async function sendMessage() {
+            const input = document.getElementById('user-input');
+            const message = input.value.trim();
+            if (!message) return;
+
+            // Display user message
+            addMessage('user', message);
+            input.value = '';
+
+            try {
+                const response = await fetch('api.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        history: conversationHistory,
+                        videoContext: currentVideoContext
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.error) {
+                    addMessage('assistant', 'Error: ' + data.error);
+                } else {
+                    addMessage('assistant', data.response);
+                    if (data.videoContext) {
+                        currentVideoContext = data.videoContext;
+                    }
+                }
+
+                // Update conversation history
+                conversationHistory.push(
+                    { role: 'user', content: message },
+                    { role: 'assistant', content: data.response }
+                );
+
+            } catch (error) {
+                addMessage('assistant', 'Error: Failed to get response');
+                console.error(error);
+            }
+        }
+
+        function addMessage(role, content) {
+            const messagesDiv = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${role}-message`;
+            messageDiv.textContent = content;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        // Handle Enter key
+        document.getElementById('user-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

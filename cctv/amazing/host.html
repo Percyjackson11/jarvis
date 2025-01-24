@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Host Video Stream</title>
+</head>
+<body>
+    <h1>Host Video Stream</h1>
+    <video id="localVideo" autoplay muted></video>
+    <textarea id="offer" readonly placeholder="Your offer will appear here..."></textarea>
+    <button onclick="startStream()">Start Stream</button>
+    <h3>Enter Viewer Answer:</h3>
+    <textarea id="answer" placeholder="Paste answer from viewer here..."></textarea>
+    <button onclick="connectAnswer()">Connect to Viewer</button>
+
+    <script>
+        let localStream;
+        let peerConnection;
+        const servers = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] }; // STUN server for NAT traversal
+
+        async function startStream() {
+            // Start webcam stream
+            localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+            document.getElementById('localVideo').srcObject = localStream;
+
+            // Initialize WebRTC connection
+            peerConnection = new RTCPeerConnection(servers);
+            localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+
+            // Create an offer and display it for the viewer
+            peerConnection.createOffer().then(offer => {
+                peerConnection.setLocalDescription(offer);
+                document.getElementById('offer').value = JSON.stringify(offer);
+            });
+
+            // Gather ICE candidates
+            peerConnection.onicecandidate = event => {
+                if (event.candidate) {
+                    document.getElementById('offer').value = JSON.stringify(peerConnection.localDescription);
+                }
+            };
+        }
+
+        function connectAnswer() {
+            const answer = JSON.parse(document.getElementById('answer').value);
+            peerConnection.setRemoteDescription(answer).catch(console.error);
+        }
+    </script>
+</body>
+</html>

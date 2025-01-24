@@ -1,0 +1,97 @@
+JUST A RATHER VERY INTELLIGENT SYSTEM
+ J.A.R.V.I.S
+ Imagine a home where technology understands you
+ perfectly – welcome to JARVIS, the future of personal
+ automation."
+ ~ SIDDH RATHOD
+ PITCH DECK
+Existing smart home and office systems often fall
+ short by offering generic automation that lacks
+ personalization and also raises data security
+ concerns.
+ There is a need for a highly personalized, secure,
+ and autonomous automation system that adapts to
+ individual user needs and integrates seamlessly
+ with a wide range of devices.
+What It Is: JARVIS is a smart home
+ automation system that acts like a personal
+ assistant for your home or office.
+ What It Does: It controls various devices and
+ systems, such as lights, security cameras,
+ and even appliances, all through voice
+ commands or automation. It can also surf
+ internet, scrape out useful information and
+ do research.
+How It’s Different: Unlike other systems, JARVIS
+ is highly personalized, learning and adapting
+ to your unique preferences and needs.
+ Main Features: It integrates with different gadgets,
+ enhances home security, and makes daily tasks
+ easier by automating routines.
+Privacy Focus: Your data is secure with JARVIS,
+ as it’s designed to ensure your information stays
+ private and protected. Also, it won’t be sending
+ data to unknown servers because your data will
+ be saved on your local home server.
+ Future Vision: The goal is to make JARVIS a
+ central, intelligent part of every home or office,
+ offering a tailored and efficient experience.
+Highly Personalized
+ Automation:
+ JARVIS offers a deeply customizable smart home
+ experience, tailoring functionality to individual preferences
+ and behaviors, unlike generic solutions that provide one
+size-fits-all automation.
+ Enhanced Security and
+ Privacy:
+ Operates autonomously with robust data protection
+ measures, minimizing reliance on external servers and
+ reducing potential privacy risks compared to current
+ systems like Alexa and Google Home.
+ Comprehensive Device
+ Integration:
+ Seamlessly connects with a broad range of devices and
+ systems, providing an all-encompassing solution for home
+ and business automation, overcoming the limitations of
+ existing smart assistants
+TAM
+ As of 2024, the global home
+ automation market is valued
+ at approximately $95 billion
+ USD
+ Customer
+ Needs:
+ SAM
+ The Indian home automation
+ market is estimated to be
+ valued around $2.5 to $3
+ billion USD.
+ SOM
+ The initial aim is to capture
+ 1% of TAM
+ Fast and responsive: The system should be fast
+ Accurate Information: The information provided should be
+ from a legitimate source.
+ Cool looking Design and GUI: Design is a very important aspect
+ Easy to Use: Your grandma should be able to use it too
+Competitor
+ Analysis
+ Although, google and
+ alexa are dominating the
+ market There are still
+ many things missing and
+ many need impovement.
+Competitor
+ Analysis
+ 60% people voted for the 50%
+ probability option which tells that,
+ many people are somewhat hesitant
+ towards trying out newer products
+ But once people gain the
+ trust that the product is
+ solid! There is no turning
+ back.
+IdeaStorm | IVM
+ Siddh Rathod
+ IITM - Mechanical
+PRESENTED BY : SIDDH RATHOD

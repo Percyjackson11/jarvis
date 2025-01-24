@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viewer Video Stream</title>
+    <style>
+        #codeInput {
+            font-size: 18px;
+            padding: 5px;
+            margin: 10px 0;
+        }
+        #remoteVideo {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+        .error {
+            color: red;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Viewer Video Stream</h1>
+    <input type="text" id="codeInput" placeholder="Enter stream code">
+    <button onclick="connectToHost()">Connect to Stream</button>
+    <div id="errorMessage" class="error"></div>
+    <video id="remoteVideo" autoplay></video>
+
+    <script>
+        let peerConnection;
+        const servers = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
+        const API_URL = 'signaling.php'; // Replace with your actual API URL
+
+        async function connectToHost() {
+            const streamCode = document.getElementById('codeInput').value.trim();
+            if (!streamCode) {
+                showError('Please enter a stream code');
+                return;
+            }
+
+            try {
+                // Get the offer from the server
+                const response = await fetch(`${API_URL}?code=${streamCode}&type=offer`);
+                const data = await response.json();
+
+                if (!data.offer) {
+                    showError('Invalid stream code or stream not found');
+                    return;
+                }
+
+                // Initialize WebRTC connection
+                peerConnection = new RTCPeerConnection(servers);
+                
+                // Handle incoming streams
+                peerConnection.ontrack = event => {
+                    document.getElementById('remoteVideo').srcObject = event.streams[0];
+                };
+
+                // Set the offer and create answer
+                const offer = JSON.parse(data.offer);
+                await peerConnection.setRemoteDescription(offer);
+                const answer = await peerConnection.createAnswer();
+                await peerConnection.setLocalDescription(answer);
+
+                // Wait for ICE gathering to complete
+                await new Promise(resolve => {
+                    if (peerConnection.iceGatheringState === 'complete') {
+                        resolve();
+                    } else {
+                        peerConnection.addEventListener('icegatheringstatechange', () => {
+                            if (peerConnection.iceGatheringState === 'complete') {
+                                resolve();
+                            }
+                        });
+                    }
+                });
+
+                // Send answer to server
+                await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        action: 'answer',
+                        code: streamCode,
+                        answer: JSON.stringify(peerConnection.localDescription)
+                    })
+                });
+
+                // Clear any error messages
+                showError('');
+
+            } catch (error) {
+                console.error('Error:', error);
+                showError('Failed to connect to stream');
+            }
+        }
+
+        function showError(message) {
+            document.getElementById('errorMessage').textContent = message;
+        }
+
+        // Handle connection state changes
+        peerConnection?.addEventListener('connectionstatechange', () => {
+            if (peerConnection.connectionState === 'failed') {
+                showError('Connection failed. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>

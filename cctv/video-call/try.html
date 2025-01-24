@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type='text/javascript' src='https://cdn.scaledrone.com/scaledrone.min.js'></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <style>
+    body {
+      display: flex;
+      height: 100vh;
+      margin: 0;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    #remoteVideo {
+      max-width: 100%;
+      max-height: 100vh;
+      box-sizing: border-box;
+      border-radius: 2px;
+      padding: 0;
+    }
+    #localVideo {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <video id="localVideo" autoplay muted></video>
+  <video id="remoteVideo" autoplay></video>
+  <script>
+    const isIframe = window.self !== window.top;
+
+    // Generate random room name if needed
+    if (!location.hash) {
+      location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
+    }
+    const roomHash = location.hash.substring(1);
+
+    // TODO: Replace with your own channel ID
+    const drone = new ScaleDrone('yiS12Ts5RdNhebyM');
+    const roomName = 'observable-' + roomHash;
+    const configuration = {
+      iceServers: [{
+        urls: 'stun:stun.l.google.com:19302'
+      }]
+    };
+    let room;
+    let pc;
+
+    function onSuccess() {};
+    function onError(error) {
+      console.error(error);
+    };
+
+    drone.on('open', error => {
+      if (error) {
+        return console.error(error);
+      }
+      room = drone.subscribe(roomName);
+      room.on('open', error => {
+        if (error) {
+          onError(error);
+        }
+      });
+      room.on('members', members => {
+        console.log('MEMBERS', members);
+        const isOfferer = members.length === 2;
+        startWebRTC(isOfferer);
+      });
+    });
+
+    function sendMessage(message) {
+      drone.publish({
+        room: roomName,
+        message
+      });
+    }
+
+    function startWebRTC(isOfferer) {
+      pc = new RTCPeerConnection(configuration);
+
+      pc.onicecandidate = event => {
+        if (event.candidate) {
+          sendMessage({'candidate': event.candidate});
+        }
+      };
+
+      if (isOfferer) {
+        pc.onnegotiationneeded = () => {
+          pc.createOffer().then(localDescCreated).catch(onError);
+        }
+      }
+
+      pc.ontrack = event => {
+        const stream = event.streams[0];
+        if (!remoteVideo.srcObject || remoteVideo.srcObject.id !== stream.id) {
+          remoteVideo.srcObject = stream;
+        }
+      };
+
+      if (!isIframe) {
+        navigator.mediaDevices.getUserMedia({
+          audio: true,
+          video: true,
+        }).then(stream => {
+          localVideo.srcObject = stream;
+          stream.getTracks().forEach(track => pc.addTrack(track, stream));
+        }, onError);
+      }
+
+      room.on('data', (message, client) => {
+        if (client.id === drone.clientId) {
+          return;
+        }
+
+ pc.setRemoteDescription(new RTCSessionDescription(message.sdp), () => {
+            if (pc.remoteDescription.type === 'offer') {
+              pc.createAnswer().then(localDescCreated).catch(onError);
+            }
+          }, onError);
+        } else if (message.candidate) {
+          pc.addIceCandidate(
+            new RTCIceCandidate(message.candidate), onSuccess, onError
+          );
+        }
+      });
+    }
+
+    function localDescCreated(desc) {
+      pc.setLocalDescription(
+        desc,
+        () => sendMessage({'sdp': pc.localDescription}),
+        onError
+      );
+    }
+
+    // If it's an iframe, we need to make sure it connects to the room
+    if (isIframe) {
+      // Create a dummy audio track to initiate the connection
+      const dummyStream = new MediaStream([createEmptyAudioTrack()]);
+      dummyStream.getTracks().forEach(track => pc.addTrack(track, dummyStream));
+    }
+
+    function createEmptyAudioTrack() {
+      const ctx = new AudioContext();
+      const oscillator = ctx.createOscillator();
+      const dst = oscillator.connect(ctx.createMediaStreamDestination());
+      oscillator.start();
+      const track = dst.stream.getAudioTracks()[0];
+      return Object.assign(track, {enabled: false});
+    }
+
+    // Ensure the remote video takes up the full iframe
+    window.addEventListener('resize', adjustRemoteVideo);
+    function adjustRemoteVideo() {
+      const remoteVideo = document.getElementById('remoteVideo');
+      remoteVideo.style.width = '100%';
+      remoteVideo.style.height = '100%';
+    }
+    adjustRemoteVideo();
+  </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type='text/javascript' src='scaledrone.min.js'></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+      align-items: center;
+      justify-content: center;
+      padding: 0 50px;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    video {
+      max-width: calc(50% - 100px);
+      margin: 0 50px;
+      box-sizing: border-box;
+      border-radius: 2px;
+      padding: 0;
+      box-shadow: rgba(156, 172, 172, 0.2) 0px 2px 2px, rgba(156, 172, 172, 0.2) 0px 4px 4px;
+    }
+    .mode-selector {
+      margin-bottom: 20px;
+    }
+    .hidden {
+      display: none;
+    }
+    #videos {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="mode-selector" id="modeSelector">
+    <button onclick="selectMode('streamer')">Streamer</button>
+    <button onclick="selectMode('viewer')">Viewer</button>
+  </div>
+  <div id="videos" class="hidden">
+    <video id="localVideo" autoplay muted></video>
+    <video id="remoteVideo" autoplay></video>
+  </div>
+  <script>
+    let isStreamer = false;
+
+    function selectMode(mode) {
+      isStreamer = mode === 'streamer';
+      document.getElementById('modeSelector').classList.add('hidden');
+      document.getElementById('videos').classList.remove('hidden');
+      initializeConnection();
+    }
+
+    function initializeConnection() {
+      if (!location.hash) {
+        location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
+      }
+      const roomHash = location.hash.substring(1);
+
+      const drone = new ScaleDrone('yiS12Ts5RdNhebyM');
+      const roomName = 'observable-' + roomHash;
+      const configuration = {
+        iceServers: [{
+          urls: 'stun:stun.l.google.com:19302'
+        }]
+      };
+      let room;
+      let pc;
+
+      function onSuccess() {};
+      function onError(error) {
+        console.error(error);
+      };
+
+      drone.on('open', error => {
+        if (error) {
+          return console.error(error);
+        }
+        room = drone.subscribe(roomName);
+        room.on('open', error => {
+          if (error) {
+            onError(error);
+          }
+        });
+        room.on('members', members => {
+          console.log('MEMBERS', members);
+          const isOfferer = members.length === 2;
+          startWebRTC(isOfferer);
+        });
+      });
+
+      function sendMessage(message) {
+        drone.publish({
+          room: roomName,
+          message
+        });
+      }
+
+      function startWebRTC(isOfferer) {
+        pc = new RTCPeerConnection(configuration);
+
+        pc.onicecandidate = event => {
+          if (event.candidate) {
+            sendMessage({'candidate': event.candidate});
+          }
+        };
+
+        if (isOfferer) {
+          pc.onnegotiationneeded = () => {
+            pc.createOffer().then(localDescCreated).catch(onError);
+          }
+        }
+
+pc.ontrack = event => {
+          const stream = event.streams[0];
+          if (!remoteVideo.srcObject || remoteVideo.srcObject.id !== stream.id) {
+            remoteVideo.srcObject = stream;
+          }
+        };
+
+        if (isStreamer) {
+          navigator.mediaDevices.getUserMedia({
+            audio: true,
+            video: true,
+          }).then(stream => {
+            localVideo.srcObject = stream;
+            stream.getTracks().forEach(track => pc.addTrack(track, stream));
+          }, onError);
+        } else {
+          // For viewers, hide the local video
+          document.getElementById('localVideo').style.display = 'none';
+        }
+
+        room.on('data', (message, client) => {
+          if (client.id === drone.clientId) {
+            return;
+          }
+
+          if (message.sdp) {
+            pc.setRemoteDescription(new RTCSessionDescription(message.sdp), () => {
+              if (pc.remoteDescription.type === 'offer') {
+                pc.createAnswer().then(localDescCreated).catch(onError);
+              }
+            }, onError);
+          } else if (message.candidate) {
+            pc.addIceCandidate(
+              new RTCIceCandidate(message.candidate), onSuccess, onError
+            );
+          }
+        });
+      }
+
+      function localDescCreated(desc) {
+        pc.setLocalDescription(
+          desc,
+          () => sendMessage({'sdp': pc.localDescription}),
+          onError
+        );
+      }
+    }
+  </script>
+</body>
+</html>
